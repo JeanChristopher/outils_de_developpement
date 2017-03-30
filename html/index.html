@@ -5,23 +5,34 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
   <title>Outils de dev</title>
 
-  <!-- CSS  -->
+<!-- CSS  -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
   <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
 </head>
 <body>
+<!-- Entete  -->
   <nav class="teal darken-1" role="navigation">
-    <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo"><i class="material-icons large">cast_connected</i> Organisateur</a>
-    </div>
+    <div class="nav-wrapper navcontainer"><a id="logo-container" href="#" class="brand-logo"><i class="material-icons large">cast_connected</i> Organisateur</a></div>
   </nav>
-  
   <div class="container row">
-	<div class="btnprojet">
-		<a class="waves-effect waves-light btn"><i class="material-icons right">event_available</i>Créer</a>
-		<a class="waves-effect waves-light btn"><i class="material-icons right">event_busy</i>Supprimer</a>
+<!-- Colonne boite à outils des PROJETS  -->	
+	<div class="card col s12 m3 l3">
+		<p class="center-align"><i class="material-icons icon-center">settings</i> Projets</p>
+		<div class="card col s12">
+			<div class="input-field">
+			  <input id="nom_new_projet" type="text" class="validate">
+			  <label for="nom_new_projet">Nom du nouveau projet</label>
+			</div>
+			<a class="waves-effect waves-light btn"><i class="material-icons right">event_available</i>Créer</a>
+		</div>
+		<div class="card col s12">
+			<p> Supprimer le projet courant.</p>
+			<a class="waves-effect waves-light btn"><i class="material-icons right">event_busy</i>Supprimer</a>
+		</div>
 	</div>
-	<div class="col s12 m8 l8">
+<!-- Colonne centrale d'affichage des projets  -->
+	<div class="colonnecentrale col s12 m6 l6">
 	<h1><b><u>Liste des projets en cours:</u></b></h1>
 	<ul class="collapsible" data-collapsible="accordion">
 	  <li>
@@ -48,9 +59,11 @@
 	  </li>	  
 	</ul>
 	</div>
-	<div class="col s12 m4 l4 row">
+<!-- Colonne boite à outils des PERSONNES  -->
+	<div class="card col s12 m3 l3">
+	<p class="center-align"><i class="material-icons icon-center">settings</i> Personnel</p>
 		<div class="card col s12">
-			<p>Choisir une personne à ajouter au projet courant</p>
+			<p>Choisir une personne à ajouter au projet courant.</p>
 			<div class="input-field">
 				<select>
 				  <option value="" disabled selected>Choix</option>
@@ -63,7 +76,7 @@
 			<a class="waves-effect waves-light btn"><i class="material-icons right">person_add</i>Ajouter</a>
 		</div>
 		<div class="card col s12">
-			<p>Sélectionner les personnes à retirer du projet courant</p>
+			<p>Sélectionner les personnes à retirer du projet courant.</p>
 			<a class="waves-effect waves-light btn"><i class="material-icons right">person_outline</i>Enlever</a>
 		</div>
 	</div>
@@ -71,7 +84,7 @@
 
   <footer class="page-footer teal darken-1">
     <div class="container">
-      <p>Créé par les master 1 Géomatique de l'ENSG</p>
+      <p class="right-align">Créé par les master 1 Géomatique de l'ENSG</p>
     </div>
   </footer>
 
