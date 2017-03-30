@@ -20,7 +20,7 @@ function fillProjectList() {
 			
 			// On créé un élément de la liste = un projet
     	    var project = document.createElement('li');
-    	    // On lui donne le même id que celui de la bdd
+    	    // On lui donne le même id que celui de la bdd avec le prefix idProjet
     	    project.setAttribute("id","idProjet"+arrayOfProjects[i][0]);
     	    
     	    // Div materialize css
@@ -85,11 +85,21 @@ function fillProjectList() {
 }
 
 function addProject(projectList) {
+	projectList = document.getElementById('Projets');
+	
+
+
 
 }	
 	
 function removeProject(projectList) {
-
+	// On récupère l'objet liste qui contient tout les futurs projets				
+    projectList = document.getElementById('Projets');
+    
+    // Trouver le projet actif
+    element = projectList.removeChild(projectList.querySelector('[class="active"]'));
+    
+    // Ne pas oublier de mettre a jour la bdd
 }
 
 function addPerson() {
@@ -100,6 +110,9 @@ function removePerson() {
 
 }
 
+setListeners {
+	document.addEventListener
+}
 
 fillProjectList();
 
