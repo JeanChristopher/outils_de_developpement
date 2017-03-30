@@ -18,42 +18,54 @@
   
   <div class="container row">
 	<div class="btnprojet">
-		<a class="waves-effect waves-light btn"><i class="material-icons right"><i class="material-icons">add_circle_outline</i></i>Créer</a>
-		<a class="waves-effect waves-light btn"><i class="material-icons right"><i class="material-icons">remove_circle_outline</i></i>Supprimer</a>
+		<a class="waves-effect waves-light btn"><i class="material-icons right">event_available</i>Créer</a>
+		<a class="waves-effect waves-light btn"><i class="material-icons right">event_busy</i>Supprimer</a>
 	</div>
 	<div class="col s12 m8 l8">
 	<h1><b><u>Liste des projets en cours:</u></b></h1>
 	<ul class="collapsible" data-collapsible="accordion">
 	  <li>
-		<div class="collapsible-header"><span class="new badge">4</span><i class="material-icons">filter_drama</i>Projet 1</div>
+		<div class="collapsible-header"><i class="material-icons">event_note</i>Projet 1</div>
 		<div class="collapsible-body">
+			<form action="#">
 			<ul>
-				<li class="liste"><a href="">Projet 1</a></li>
-				<li class="liste"><a href="">Projet 2</a></li>
-				<li class="liste"><a href="">...</a></li>
+				<li><input type="checkbox" class="filled-in" id="filled-in-box1"/><label for="filled-in-box1">Personne 1</label></li>
+				<li><input type="checkbox" class="filled-in" id="filled-in-box2"/><label for="filled-in-box2">Personne 2</label></li>
+				<li><input type="checkbox" class="filled-in" id="filled-in-box3"/><label for="filled-in-box3">Personne 3</label></li>
 			</ul>
+			</form>
 		</div>
 	  </li>
 	  <li>
-		<div class="collapsible-header"><span class="new badge">4</span><i class="material-icons">filter_drama</i>Projet 1</div>
+		<div class="collapsible-header"><i class="material-icons">event_note</i>Projet 2</div>
 		<div class="collapsible-body">
 			<ul>
-				<li class="liste"><a href="">Projet 1</a></li>
-				<li class="liste"><a href="">Projet 2</a></li>
-				<li class="liste"><a href="">...</a></li>
+				<li><input type="checkbox" class="filled-in" id="filled-in-box4"/><label for="filled-in-box4">Personne 1</label></li>
+				<li><input type="checkbox" class="filled-in" id="filled-in-box5"/><label for="filled-in-box5">Personne 2</label></li>
+				<li><input type="checkbox" class="filled-in" id="filled-in-box6"/><label for="filled-in-box6">Personne 3</label></li>
 			</ul>
 		</div>
 	  </li>	  
 	</ul>
 	</div>
-	<div class="col s12 m4 l4 input-field">
-		<select>
-		  <option value="" disabled selected>Choose your option</option>
-		  <option value="1">Option 1</option>
-		  <option value="2">Option 2</option>
-		  <option value="3">Option 3</option>
-		</select>
-		<label>Materialize Select</label>
+	<div class="col s12 m4 l4 row">
+		<div class="card col s12">
+			<p>Choisir une personne à ajouter au projet courant</p>
+			<div class="input-field">
+				<select>
+				  <option value="" disabled selected>Choix</option>
+				  <option value="1">Personne 1</option>
+				  <option value="2">Personne 2</option>
+				  <option value="3">Personne 3</option>
+				</select>
+				
+			</div>
+			<a class="waves-effect waves-light btn"><i class="material-icons right">person_add</i>Ajouter</a>
+		</div>
+		<div class="card col s12">
+			<p>Sélectionner les personnées à retirer du projet courant</p>
+			<a class="waves-effect waves-light btn"><i class="material-icons right">person_outline</i>Enlever</a>
+		</div>
 	</div>
   </div>
 
