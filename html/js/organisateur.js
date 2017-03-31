@@ -83,12 +83,9 @@ function fillProjectList() {
     
 	}
 }
-
+/*
 function addProject(projectList) {
 	projectList = document.getElementById('Projets');
-	
-
-
 
 }	
 	
@@ -110,9 +107,9 @@ function removePerson() {
 
 }
 
-setListeners {
-	document.addEventListener
+function setListeners {
+	//document.addEventListener
 }
-
+*/
 fillProjectList();
 
