@@ -82,6 +82,18 @@ function fillProjectList() {
         form.appendChild(listPeople);
     
 	}
+	
+function Project() {
+	// On vérifie si le champ du nom est rempli.
+	if (!document.getElementById("nom_new_projet")[0].value) {
+		
+	}
+}
+
+timetime[0]
+
+	
+	
 }
 /*
 function addProject(projectList) {
@@ -107,9 +119,19 @@ function removePerson() {
 
 }
 
+
+
 function setListeners {
-	//document.addEventListener
+	element.addEventListener("click", function(){ alert("Hello World!"); });
+	
 }
 */
+
+// Javascript pour aller chercher les personnes dan sla base d eodonné
+// Regarder l'état des buttons 
+
+
+
+
 fillProjectList();
 
