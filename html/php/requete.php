@@ -1,5 +1,32 @@
 <?php
 
+function evaluer($context){
+	switch ($context['nomFonction']) {
+	    case "addProject":
+	        addProject($connection,$var1,$var2,$var3,$var4);
+	        break;
+	
+	    case "removeProject":
+	        removeProject($connection,$nom);
+	        break;
+	
+	    case "getPersonnes":
+	        getPersonnes($connection);
+	        break;
+	
+		case "addPersonToProject":
+	        addPersonToProject($connection,$idProject,$nomProjet,$idPersonne,$nomPersonne);
+	        break;
+	
+	 	case "getCurrentProjects":
+	        getCurrentProjects($connection);
+	        break;
+		default:
+			throw new Exception('Methode inconnue');
+			break;
+	}
+}
+
 //Connexion au serveur
 function connection {
 	$link = pg_connect ("host=localhost port=5432 dbname=Application user=postgres password=postgres");
