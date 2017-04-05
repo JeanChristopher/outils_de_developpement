@@ -507,7 +507,6 @@ if (jQuery) {
       // Open collapsible. object: .collapsible-header
       function collapsibleOpen(object) {
         object.toggleClass('active');
-
         if (options.accordion || collapsible_type === "accordion" || collapsible_type === undefined) { // Handle Accordion
           accordionOpen(object);
         } else { // Handle Expandables
@@ -526,6 +525,7 @@ if (jQuery) {
         } else {
           if (typeof(options.onClose) === "function") {
             options.onClose.call(this, object.parent());
+			
           }
         }
       }
@@ -581,7 +581,19 @@ if (jQuery) {
         if (isChildrenOfPanelHeader(element)) {
           element = getPanelHeader(element);
         }
-
+		
+		// on récupère l'élément bouton suppr Projet
+		function activDesactivBouton (elmt){
+			if (elmt.className == "waves-effect waves-light btn"){
+				elmt.className = "waves-effect waves-light btn disabled";
+			}
+			else if (elmt.className == "waves-effect waves-light btn disabled"){
+				elmt.className = "waves-effect waves-light btn";
+			}
+		}
+		var elmtBtnSuppProjet = document.getElementById("BtnSuppProjet");
+		activDesactivBouton(elmtBtnSuppProjet);
+		
         collapsibleOpen(element);
       });
 
