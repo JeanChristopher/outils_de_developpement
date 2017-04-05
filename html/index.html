@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta http-equiv="Content-Type" content="text/html">
+  <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
   <title>Outils de dev</title>
 
@@ -46,9 +47,9 @@
 		<div class="collapsible-body">
 			<form action="#">
 			<ul class="test">
-				<li><input type="checkbox" class="filled-in" id="filled-in-box1"/><label for="filled-in-box1">Personne 1</label></li>
-				<li><input type="checkbox" class="filled-in" id="filled-in-box2"/><label for="filled-in-box2">Personne 2</label></li>
-				<li><input type="checkbox" class="filled-in" id="filled-in-box3"/><label for="filled-in-box3">Personne 3</label></li>
+				<li><input onchange="activDesactivBoutonSupprPerso(this.checked)" type="checkbox" class="filled-in" id="filled-in-box1"/><label for="filled-in-box1">Personne 1</label></li>
+				<li><input onchange="activDesactivBoutonSupprPerso(this.checked)" type="checkbox" class="filled-in" id="filled-in-box2"/><label for="filled-in-box2">Personne 2</label></li>
+				<li><input onchange="activDesactivBoutonSupprPerso(this.checked)" type="checkbox" class="filled-in" id="filled-in-box3"/><label for="filled-in-box3">Personne 3</label></li>
 			</ul>
 			</form>
 		</div>
@@ -57,9 +58,9 @@
 		<div class="collapsible-header"><i class="material-icons">event_note</i>Projet 2</div>
 		<div class="collapsible-body">
 			<ul>
-				<li><input type="checkbox" class="filled-in" id="filled-in-box4"/><label for="filled-in-box4">Personne 1</label></li>
-				<li><input type="checkbox" class="filled-in" id="filled-in-box5"/><label for="filled-in-box5">Personne 2</label></li>
-				<li><input type="checkbox" class="filled-in" id="filled-in-box6"/><label for="filled-in-box6">Personne 3</label></li>
+				<li><input onchange="activDesactivBoutonSupprPerso(this.checked)" type="checkbox" class="filled-in" id="filled-in-box4"/><label for="filled-in-box4">Personne 1</label></li>
+				<li><input onchange="activDesactivBoutonSupprPerso(this.checked)" type="checkbox" class="filled-in" id="filled-in-box5"/><label for="filled-in-box5">Personne 2</label></li>
+				<li><input onchange="activDesactivBoutonSupprPerso(this.checked)" type="checkbox" class="filled-in" id="filled-in-box6"/><label for="filled-in-box6">Personne 3</label></li>
 			</ul>
 		</div>
 	  </li>	  
@@ -84,7 +85,7 @@
 		<div class="section col s12">
 		<div class="divider"></div>
 			<p>Sélectionner les personnes à retirer du projet courant.</p>
-			<a class="waves-effect waves-light btn"><i class="material-icons right">person_outline</i>Enlever</a>
+			<a class="waves-effect waves-light btn disabled" id="BtnSuppPerso"><i class="material-icons right">person_outline</i>Enlever</a>
 		</div>
 	</div>
   </div>
