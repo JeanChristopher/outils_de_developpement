@@ -82,4 +82,15 @@ body, a{
 .colonnecentrale{
 	margin-left: 0.5rem;
 }
-
+.divider{
+	margin-top:1rem;
+	margin-bottom:1rem;	
+}
+.titreOutils{
+	font-size: 20px;
+}
+.divider {
+  height: 1px;
+  margin-left: -1rem;
+  margin-right:-1rem;
+}
