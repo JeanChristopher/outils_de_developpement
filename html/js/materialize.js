@@ -51,15 +51,15 @@ if (typeof(jQuery) === 'undefined') {
  *
 */
 
-function activDesactivBouton(elmtBtn){
-			if (elmtBtn.className == "waves-effect waves-light btn"){
-				elmtBtn.className = "waves-effect waves-light btn disabled";
-			}
-			else if (elmtBtn.className == "waves-effect waves-light btn disabled"){
-				elmtBtn.className = "waves-effect waves-light btn";
-			}
-		}
-		
+function activDesactivBoutonSupprProjet(elmtBtn){
+	if (elmtBtn.className == "waves-effect waves-light btn"){
+		elmtBtn.className = "waves-effect waves-light btn disabled";
+	}
+	else if (elmtBtn.className == "waves-effect waves-light btn disabled"){
+		elmtBtn.className = "waves-effect waves-light btn";
+	}
+}
+	
 function activDesactivBoutonNewProjet(bouton,nomNewProjet){
 	var elmtBtnCreerProjet = document.getElementById(bouton);
 	var nomNewProjet = document.getElementById(nomNewProjet);
@@ -70,7 +70,27 @@ function activDesactivBoutonNewProjet(bouton,nomNewProjet){
 		elmtBtnCreerProjet.className = "waves-effect waves-light btn";
 	}
 }
-	
+
+function activDesactivBoutonSupprPerso(checked){
+	var elmtBtnSuppProjet = document.getElementById("BtnSuppPerso");
+	if (checked){
+		elmtBtnSuppProjet.className = "waves-effect waves-light btn";
+	}
+	else{
+		elmtBtnSuppProjet.className = "waves-effect waves-light btn disabled";
+	}
+}
+
+function test(){
+	var input = document.getElementsByTagName("input");
+	var elmtBtnSuppProjet = document.getElementById("BtnSuppPerso");
+	for (var i = 0; i < input.length; i++) {
+		input[i].checked = false;
+	}
+	elmtBtnSuppProjet.className = "waves-effect waves-light btn disabled";
+	console.log('ok');
+}
+
 
 // t: current time, b: begInnIng value, c: change In value, d: duration
 jQuery.easing['jswing'] = jQuery.easing['swing'];
@@ -605,7 +625,12 @@ if (jQuery) {
 		
 		// on récupère l'élément bouton suppr Projet
 		var elmtBtnSuppProjet = document.getElementById("BtnSuppProjet");
-		activDesactivBouton(elmtBtnSuppProjet);
+		activDesactivBoutonSupprProjet(elmtBtnSuppProjet);
+		
+		//réinitialisation des checkbox
+		test();
+
+		
 		
         collapsibleOpen(element);
       });
