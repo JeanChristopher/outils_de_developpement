@@ -85,25 +85,41 @@ function fillProjectList() {
 	
 	
 }
-function addProject(projectList) {
-    
+
+function addProject(element) {
+    var saisie = element;
     //TESTS (opt)
     //Vérifier si champs vide
     //Vérifier si projet n'existe pas dans la bdd
         // Récupérer l'identifiant
 
-    //AJAX
+    //Requete ajax pour créer le projet dans la bdd
     var ajax = new XMLHttpRequest();
     ajax.open('POST', 'php/requete.php', true);
     ajax.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
     ajax.addEventListener('readystatechange',  function(e) {
-        if(ajax.readyState == 4 && ajax.status == 200) {
-            //  
+        if(ajax.readyState == 4 && ajax.status == 200) {  
         }        
-    });    
-    // Mettre les bons noms de variables
-    var data = "projet="+saisie.value;
+    });
+    
+    var data = "idFonction=addProject&nomProjet="+saisie.value;
     ajax.send(data);
+    
+    
+    var idRetourne = 0;
+    //Recupérer l'id du projet généré par le sgbd 
+    var ajax1 = new XMLHttpRequest();
+    ajax1.open('POST', 'php/requete.php', true);
+    ajax1.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    ajax1.addEventListener('readystatechange',  function(e) {
+        if(ajax1.readyState == 4 && ajax.status == 200) {
+            $idRetourne = parseInt(ajax1.responseText);  
+        }        
+    });
+    
+    
+    var data = "idFonction=addProject&nomProjet="+saisie.value;
+    ajax1.send(data);    
     
     // DOM
     projectList = document.getElementById('Projets');
@@ -111,18 +127,16 @@ function addProject(projectList) {
 	// On créé un élément de la liste = un projet
     var project = document.createElement('li');
     
-    //
     
     
-    
-    
+    // !!! (opt) faire un test pour vérifier que l'id n'est pas nul
     // On lui donne le même id que celui de la bdd avec le prefix idProjet
-    project.setAttribute("id","idProjet"+arrayOfProjects[i][0]);
+    project.setAttribute("id","idProjet"+idRetourne);
     
     // Div materialize css
     var collapsHeader = document.createElement('div');
     collapsHeader.setAttribute("class","collapsible-header");
-    collapsHeader.textContent = arrayOfProjects[i][1];
+    collapsHeader.textContent = saisie.value ;
     
 	// Div materialize css
     var materialIcons  = document.createElement('i');
@@ -147,11 +161,9 @@ function addProject(projectList) {
     project.appendChild(collapsBody);
 	projectList.appendChild(project);
     
-    //.getElementsByClassName
-    
-    projectList.preventDefault();
-}	
-	
+}
+
+/*	
 function removeProject(projectList) {
 	// On récupère l'objet liste qui contient tout les futurs projets				
     projectList = document.getElementById('Projets');
@@ -176,13 +188,22 @@ function setListeners {
 	element.addEventListener("click", function(){ alert("Hello World!"); });
 	
 }
-*/
+
 
 // Javascript pour aller chercher les personnes dan sla base d eodonné
 // Regarder l'état des buttons 
 
 
-
+*/
 
 fillProjectList();
+//Ajouter un projet
+var avoir_valeur = document.getElementById('nouv_projet');
+var saisie = avoir_valeur.elements["new_projet"];
+
+avoir_valeur.addEventListener('submit', function () { addProject(saisie) });
+
+
+
+
 

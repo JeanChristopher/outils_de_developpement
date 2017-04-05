@@ -1,10 +1,10 @@
 <?php
 
 function evaluer($connection,$context){
-	switch ($context['nomFonction']) {
+	switch ($context['idFonction']) {
 		
 	    case "addProject":
-	        addProject($connection,$nomProjet);
+	        addProject($connection,$context['nomProjet']);
 	        break;
 	
 	    case "removeProject":
@@ -22,6 +22,10 @@ function evaluer($connection,$context){
 	 	case "getCurrentProjects":
 	        getCurrentProjects($connection);
 	        break;
+        
+        case "getIdProject":
+	        getIdProject($connection,$nomProjet);
+	        break;
 	
 		default:
 			throw new Exception('Methode inconnue');
@@ -30,7 +34,7 @@ function evaluer($connection,$context){
 }
 
 //Connexion au serveur
-function connection {
+function connection() {
 	$link = pg_connect ("host=localhost port=5432 dbname=Application user=postgres password=postgres");
 
 	if(!$link) {
@@ -44,8 +48,8 @@ function connection {
 //TABLE PROJET
 
 // Insertion d'une ligne dans la table projet 
-function addProject($connection,$var1,$var2,$var3,$var4) {
-	$requete = "INSERT INTO Projet VALUES($var1,$var2,$var3,$var4)";
+function addProject($connection,$nomProjet) {
+	$requete = "INSERT INTO Projet VALUES($nomProjet)";
 	$result = pg_query($link,$requete);
 	if (!$result) {
 		echo "Une erreur s'est produite.\n";
@@ -55,12 +59,25 @@ function addProject($connection,$var1,$var2,$var3,$var4) {
 
 // Suppression d'une ligne dans la table 
 function removeProject($connection,$nom) {
-	$requete = "DELETE FROM projet WHERE nom like '$nom' ";
+	$requete = "DELETE FROM projet WHERE nom LIKE '$nom' ";
 	$result = pg_query($connection,$requete);
 	if (!$result) {
 		echo "Une erreur s'est produite.\n";
 		exit;
 	}
+}
+
+// Suppression d'une ligne dans la table 
+function getIdProject($connection,$nom) {
+	$requete = "SELECT id FROM projet WHERE nom LIKE '$nom'";
+	$result = pg_query($connection,$requete);
+	if (!$result) {
+		echo "Une erreur s'est produite.\n";
+		exit;
+	}
+    else {
+        return pg_fetch_result ($result,0,0)
+    }
 }
 
 //TABLE UTILISATEURS
@@ -102,5 +119,9 @@ function getCurrentProjects($connection) {
 		return pg_fetch_all($result);
 	}
 }
+
+
+$link = connection();
+evaluer($link, $_POST);
 
 ?>
