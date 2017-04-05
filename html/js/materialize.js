@@ -51,6 +51,27 @@ if (typeof(jQuery) === 'undefined') {
  *
 */
 
+function activDesactivBouton(elmtBtn){
+			if (elmtBtn.className == "waves-effect waves-light btn"){
+				elmtBtn.className = "waves-effect waves-light btn disabled";
+			}
+			else if (elmtBtn.className == "waves-effect waves-light btn disabled"){
+				elmtBtn.className = "waves-effect waves-light btn";
+			}
+		}
+		
+function activDesactivBoutonNewProjet(bouton,nomNewProjet){
+	var elmtBtnCreerProjet = document.getElementById(bouton);
+	var nomNewProjet = document.getElementById(nomNewProjet);
+	if (nomNewProjet.value == "" || nomNewProjet.value.substring(0,1) == " " || nomNewProjet.value.substring(0,1) == "-" || nomNewProjet.value.substring(0,1) == "*" || nomNewProjet.value.substring(0,1) == "_" || nomNewProjet.value.substring(0,1) == ":" || nomNewProjet.value.substring(0,1) == "/"){
+		elmtBtnCreerProjet.className = "waves-effect waves-light btn disabled";
+	}
+	else{
+		elmtBtnCreerProjet.className = "waves-effect waves-light btn";
+	}
+}
+	
+
 // t: current time, b: begInnIng value, c: change In value, d: duration
 jQuery.easing['jswing'] = jQuery.easing['swing'];
 
@@ -583,14 +604,6 @@ if (jQuery) {
         }
 		
 		// on récupère l'élément bouton suppr Projet
-		function activDesactivBouton (elmt){
-			if (elmt.className == "waves-effect waves-light btn"){
-				elmt.className = "waves-effect waves-light btn disabled";
-			}
-			else if (elmt.className == "waves-effect waves-light btn disabled"){
-				elmt.className = "waves-effect waves-light btn";
-			}
-		}
 		var elmtBtnSuppProjet = document.getElementById("BtnSuppProjet");
 		activDesactivBouton(elmtBtnSuppProjet);
 		
