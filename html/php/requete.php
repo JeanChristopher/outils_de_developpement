@@ -1,13 +1,14 @@
 <?php
 
-function evaluer($context){
+function evaluer($connection,$context){
 	switch ($context['nomFonction']) {
+		
 	    case "addProject":
-	        addProject($connection,$var1,$var2,$var3,$var4);
+	        addProject($connection,$nomProjet);
 	        break;
 	
 	    case "removeProject":
-	        removeProject($connection,$nom);
+	        removeProject($connection,$nomProjet);
 	        break;
 	
 	    case "getPersonnes":
@@ -21,6 +22,7 @@ function evaluer($context){
 	 	case "getCurrentProjects":
 	        getCurrentProjects($connection);
 	        break;
+	
 		default:
 			throw new Exception('Methode inconnue');
 			break;
