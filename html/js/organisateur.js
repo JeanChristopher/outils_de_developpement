@@ -83,22 +83,73 @@ function fillProjectList() {
     
 	}
 	
-function Project() {
-	// On vérifie si le champ du nom est rempli.
-	if (!document.getElementById("nom_new_projet")[0].value) {
-		
-	}
-}
-
-timetime[0]
-
-	
 	
 }
-/*
 function addProject(projectList) {
-	projectList = document.getElementById('Projets');
+    
+    //TESTS (opt)
+    //Vérifier si champs vide
+    //Vérifier si projet n'existe pas dans la bdd
+        // Récupérer l'identifiant
 
+    //AJAX
+    var ajax = new XMLHttpRequest();
+    ajax.open('POST', 'php/requete.php', true);
+    ajax.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    ajax.addEventListener('readystatechange',  function(e) {
+        if(ajax.readyState == 4 && ajax.status == 200) {
+            //  
+        }        
+    });    
+    // Mettre les bons noms de variables
+    var data = "projet="+saisie.value;
+    ajax.send(data);
+    
+    // DOM
+    projectList = document.getElementById('Projets');
+			
+	// On créé un élément de la liste = un projet
+    var project = document.createElement('li');
+    
+    //
+    
+    
+    
+    
+    // On lui donne le même id que celui de la bdd avec le prefix idProjet
+    project.setAttribute("id","idProjet"+arrayOfProjects[i][0]);
+    
+    // Div materialize css
+    var collapsHeader = document.createElement('div');
+    collapsHeader.setAttribute("class","collapsible-header");
+    collapsHeader.textContent = arrayOfProjects[i][1];
+    
+	// Div materialize css
+    var materialIcons  = document.createElement('i');
+    materialIcons.setAttribute("class","material-icons");
+    materialIcons.textContent = "event_note";
+	// Div materialize css    	    
+    var collapsBody = document.createElement('div');
+    collapsBody.setAttribute("class","collapsible-body");
+	
+	// Créé la liste des personnes qui vont participer au projet    	    
+    var listPeople = document.createElement('ul');
+	listPeople.setAttribute("class","listPeople");
+	
+	// Créé un formulaire pour exploiter les tick et le php (encore à définir)
+	var form = document.createElement("FORM");
+	
+	// On ajoute chaque noeud à son parent
+    form.appendChild(listPeople);
+    collapsBody.appendChild(form);
+    collapsHeader.appendChild(materialIcons);
+    project.appendChild(collapsHeader);
+    project.appendChild(collapsBody);
+	projectList.appendChild(project);
+    
+    //.getElementsByClassName
+    
+    projectList.preventDefault();
 }	
 	
 function removeProject(projectList) {
