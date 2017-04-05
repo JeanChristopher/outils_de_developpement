@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+  <title>Outils de dev</title>
+
+<!-- CSS  -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+</head>
+<body>
+<!-- Entete  -->
+  <nav class="teal darken-1" role="navigation">
+    <div class="nav-wrapper navcontainer"><a id="logo-container" href="#" class="brand-logo"><i class="material-icons large">cast_connected</i> Organisateur</a></div>
+  </nav>
+  <div class="container row">
+<!-- Colonne boite à outils des PROJETS  -->	
+	<div class="card col s12 m12 l3">
+		<p class="center-align titreOutils"><i class="material-icons icon-center">settings</i> Projets</p>
+		<div class="section col s12">
+			<div class="input-field">
+				<form action="#">
+					<input id="nom_new_projet" type="text" class="validate" onkeyup='activDesactivBoutonNewProjet("okCreerProjet","nom_new_projet")'>
+					<label for="nom_new_projet">Nom du nouveau projet</label>
+				
+					<button class="waves-effect waves-light btn disabled" type="submit" id="okCreerProjet"name="action">Créer
+						<i class="material-icons right">event_available</i>
+					</button>
+				</form>
+			</div>
+		</div>
+		<div class="section col s12">
+			<div class="divider"></div>
+			<p> Supprimer le projet courant.</p>
+			<a class="waves-effect waves-light btn disabled" id="BtnSuppProjet"><i class="material-icons right">event_busy</i>Supprimer</a>
+		</div>
+	</div>
+<!-- Colonne centrale d'affichage des projets  -->
+	<div class="colonnecentrale col s12 m12 l6">
+	<h1><b><u>Liste des projets en cours:</u></b></h1>
+	<ul id="Projets" class="collapsible" data-collapsible="accordion">
+	  <li>
+		<div class="collapsible-header"><i class="material-icons">event_note</i>Projet 1</div>
+		<div class="collapsible-body">
+			<form action="#">
+			<ul class="test">
+				<li><input type="checkbox" class="filled-in" id="filled-in-box1"/><label for="filled-in-box1">Personne 1</label></li>
+				<li><input type="checkbox" class="filled-in" id="filled-in-box2"/><label for="filled-in-box2">Personne 2</label></li>
+				<li><input type="checkbox" class="filled-in" id="filled-in-box3"/><label for="filled-in-box3">Personne 3</label></li>
+			</ul>
+			</form>
+		</div>
+	  </li>
+	  <li>
+		<div class="collapsible-header"><i class="material-icons">event_note</i>Projet 2</div>
+		<div class="collapsible-body">
+			<ul>
+				<li><input type="checkbox" class="filled-in" id="filled-in-box4"/><label for="filled-in-box4">Personne 1</label></li>
+				<li><input type="checkbox" class="filled-in" id="filled-in-box5"/><label for="filled-in-box5">Personne 2</label></li>
+				<li><input type="checkbox" class="filled-in" id="filled-in-box6"/><label for="filled-in-box6">Personne 3</label></li>
+			</ul>
+		</div>
+	  </li>	  
+	</ul>
+	</div>
+<!-- Colonne boite à outils des PERSONNES  -->
+	<div class="card col s12 m12 l3">
+	<p class="center-align titreOutils"><i class="material-icons icon-center">settings</i> Personnel</p>
+		<div class="section col s12">
+			<p>Choisir une personne à ajouter au projet courant.</p>
+			<div class="input-field">
+				<select>
+				  <option value="" disabled selected>Choix</option>
+				  <option value="1">Personne 1</option>
+				  <option value="2">Personne 2</option>
+				  <option value="3">Personne 3</option>
+				</select>
+				
+			</div>
+			<a class="waves-effect waves-light btn"><i class="material-icons right">person_add</i>Ajouter</a>
+		</div>
+		<div class="section col s12">
+		<div class="divider"></div>
+			<p>Sélectionner les personnes à retirer du projet courant.</p>
+			<a class="waves-effect waves-light btn"><i class="material-icons right">person_outline</i>Enlever</a>
+		</div>
+	</div>
+  </div>
+
+  <footer class="page-footer teal darken-1">
+    <div class="container">
+      <p class="right-align">Créé par les master 1 Géomatique de l'ENSG</p>
+    </div>
+  </footer>
+
+
+  <!--  Scripts-->
+  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="js/materialize.js"></script>
+  <script src="js/organisateur.js"></script>
+  <script src="js/init.js"></script>
+
+  </body>
+</html>
