@@ -51,6 +51,9 @@ if (typeof(jQuery) === 'undefined') {
  *
 */
 
+var elmtNomProjet = document.getElementById("nom_new_projet");
+elmtNomProjet.value = "";
+
 function activDesactivBoutonSupprProjet(elmtBtn){
 	if (elmtBtn.className == "waves-effect waves-light btn"){
 		elmtBtn.className = "waves-effect waves-light btn disabled";
