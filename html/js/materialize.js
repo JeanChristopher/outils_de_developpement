@@ -96,9 +96,10 @@ function InitBtnSuppProjet(){
 	}
 	elmtBtnSuppProjet.className = "waves-effect waves-light btn disabled";
 }
+	
 var elmtBtnSuppProjet = document.getElementById("BtnSuppProjet");
 var elmtBtnAjoutPerso = document.getElementById("BtnAjoutPerso");
-elmtBtnSuppProjet.addEventListener("onclick",reinitBoutonDisabled(elmtBtnSuppProjet));
+
 
 
 
@@ -573,11 +574,15 @@ if (jQuery) {
           if (typeof(options.onOpen) === "function") {
             options.onOpen.call(this, object.parent());
           }
+		  elmtBtnSuppProjet.className = "waves-effect waves-light btn";
+		  elmtBtnAjoutPerso.className = "waves-effect waves-light btn";
         } else {
           if (typeof(options.onClose) === "function") {
             options.onClose.call(this, object.parent());
 			
           }
+		  elmtBtnSuppProjet.className = "waves-effect waves-light btn disabled";
+		  elmtBtnAjoutPerso.className = "waves-effect waves-light btn disabled";
         }
       }
 
@@ -632,10 +637,7 @@ if (jQuery) {
         if (isChildrenOfPanelHeader(element)) {
           element = getPanelHeader(element);
         }
-		
-		// on change la visualisation des boutons lorsqu'un bloc est ouvert et inverssement lorsqu'il se ferme
-		activDesactivBouton(elmtBtnSuppProjet);
-		activDesactivBouton(elmtBtnAjoutPerso);
+	
 		
 		//réinitialisation des checkbox
 		InitBtnSuppProjet();
