@@ -23,6 +23,10 @@ function evaluer($connexion,$context){
     	case"addPersonToProject":
     	    addPersonToProject($connexion,$context['idProject'],$context['idPersonne']);
     	        break;
+    	    	
+    	case"removePersonFromProject":
+    	    removePersonFromProject($connexion,$context['idPersonne']);
+    	        break;
     	    
     	case"getCurrentProjects":
     	    getCurrentProjects($connexion);
@@ -114,6 +118,16 @@ function checkIfProjectExists($connexion,$nom) {
 // TABLE PROJETS ET UTILISATEURS
 
 // Ajoute une personne à un projet
+function addPersonToProject($connexion,$idProject,$idPersonne) {
+	$requete = "INSERT INTO Projet_en_cours(id_projet,id_employe) VALUES($idProject,$idPersonne)";
+	$result = pg_query($connexion,$requete);
+	if (!$result) {
+		echo "Une erreur s'est produite.\n";
+		exit;
+	}
+
+
+// Retirer une personne à d'un projet
 function addPersonToProject($connexion,$idProject,$idPersonne) {
 	$requete = "INSERT INTO Projet_en_cours(id_projet,id_employe) VALUES($idProject,$idPersonne)";
 	$result = pg_query($connexion,$requete);

@@ -68,6 +68,7 @@ function fillProjectList() {
         var input = document.createElement('input');
         input.setAttribute("type","checkbox");
         input.setAttribute("class","filled-in");
+        input.setAttribute("onchange","activDesactivBoutonSupprPerso(this.checked)");
         input.setAttribute("id","idPersonne"+arrayOfProjects[i][2]);
         
         //Créé un élément label obligatoire pour aller avec l'input
@@ -125,7 +126,8 @@ function addProject() {
 						ajax1.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 						ajax1.addEventListener('readystatechange',  function(e) {
 							if(ajax1.readyState == 4 && ajax1.status == 200) {
-								var idRetourne = JSON.parse(ajax1.responseText)
+								
+								var idRetourne = ajax1.responseText
 								
 								// DOM
 								projectList = document.getElementById('Projets');
@@ -246,6 +248,7 @@ function addPersonne() {
     var input = document.createElement('input');
     input.setAttribute("type","checkbox");
     input.setAttribute("class","filled-in");
+    input.setAttribute("onchange","activDesactivBoutonSupprPerso(this.checked)");
     input.setAttribute("id","idPersonne"+idPersonne);
     
     //Créé un élément label obligatoire pour aller avec l'input
@@ -279,11 +282,37 @@ function addPersonne() {
 
 }
 
-/*
-function removePerson() {
 
+function removePersonne() {
+	// On récupère l'objet liste qui contient tout les futurs projets				
+    var projectList = document.getElementById('Projets');
+    // Trouver le projet actif
+    var nomProjet = projectList.querySelector('[class="active"]');
+    // Supprimer le projet
+    var checkedBoxes = nomProjet.querySelectorAll('input[class=filled-in]:checked');
+    for (var i = 0; i < checkedBoxes.length; i++){
+		console.log(checkedBoxes[i])
+	}
+	//nomProjet.removeChild(projectList.querySelectorAll('input[class=filled-in]:checked'));
+    
+    //Recupere l'id contenue dans le noeud
+	
+	// Supprime de la bdd
+	/*
+	var ajax1 = new XMLHttpRequest();
+	ajax1.open('POST', 'php/requete.php', true);
+	ajax1.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+	ajax1.addEventListener('readystatechange',  function(e) {
+		if(ajax1.readyState == 4 && ajax1.status == 200) {
+			
+		}        
+	});
+	
+	var data = "idFonction=removeProject&idProject="+idProject;
+	ajax1.send(data); 
+    */
 }
-
+/*
 
 
 function setListeners {
@@ -305,6 +334,6 @@ fillProjectList();
 document.getElementById('okCreerProjet').addEventListener('click', function () { addProject() });
 document.getElementById('BtnSuppProjet').addEventListener('click', function () { removeProject() });
 document.getElementById('BtnAjoutPerso').addEventListener('click', function () { addPersonne() });
-
+document.getElementById('BtnSuppPerso').addEventListener('click', function () { removePersonne() });
 
 
