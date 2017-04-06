@@ -2,6 +2,19 @@
 
 function fillProjectList() {
 	
+	var ajax1 = new XMLHttpRequest();
+        ajax1.open('POST', 'php/requete.php', true);
+        ajax1.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        ajax1.addEventListener('readystatechange',  function(e) {
+            if(ajax1.readyState == 4 && ajax1.status == 200) {
+
+	    		
+	    		}        
+        });
+  
+        var data = "idFonction=getIdProject&nomProjet="+nomProjet;
+        ajax1.send(data); 
+	
 	// tableau de test
     arrayOfProjects = [ 
     					['0','Projet1','0','Marion'],
@@ -86,80 +99,81 @@ function fillProjectList() {
 	
 }
 
-function addProject(element) {
-    var saisie = element;
-    //TESTS (opt)
-    //Vérifier si champs vide
-    //Vérifier si projet n'existe pas dans la bdd
-        // Récupérer l'identifiant
 
+function addProject() {
+    // -- TESTS manquants (opt)
+    //Vérifier si projet n'existe pas dans la bdd
+    
+    // il y a 2 requetes ajax, imbriquées, la première insère un nouveau projet, la seconde imbriquée recupère l'id du projet crée. 
+    // A l'intérieur de la seconde boucle asynchrone on créé le nouvel élément dom dès que le serveur est ok.  
+
+	var nomProjet = document.getElementById('nom_new_projet').value;
+	console.log("php ?")
     //Requete ajax pour créer le projet dans la bdd
     var ajax = new XMLHttpRequest();
     ajax.open('POST', 'php/requete.php', true);
     ajax.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
     ajax.addEventListener('readystatechange',  function(e) {
         if(ajax.readyState == 4 && ajax.status == 200) {  
-        }        
+
+        // Si la requete est correcte, alors on ajoute le projet au dom
+        var idRetourne;
+        //Recupérer l'id du projet généré par le sgbd 
+        var ajax1 = new XMLHttpRequest();
+        ajax1.open('POST', 'php/requete.php', true);
+        ajax1.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        ajax1.addEventListener('readystatechange',  function(e) {
+            if(ajax1.readyState == 4 && ajax1.status == 200) {
+                var idRetourne = JSON.parse(ajax1.responseText)
+	    	    
+	    	    // DOM
+	    	    projectList = document.getElementById('Projets');
+	    	    		
+	    	    // On créé un élément de la liste = un projet
+	    	    var project = document.createElement('li');
+	    	    
+	    	    // On lui donne le même id que celui de la bdd avec le prefix idProjet
+	    	    project.setAttribute("id","idProjet"+idRetourne);
+	    	    
+	    	    // Div materialize css
+	    	    var collapsHeader = document.createElement('div');
+	    	    collapsHeader.setAttribute("class","collapsible-header");
+	    	    collapsHeader.textContent = nomProjet ;
+	    	    
+	    	    // Div materialize css
+	    	    var materialIcons  = document.createElement('i');
+	    	    materialIcons.setAttribute("class","material-icons");
+	    	    materialIcons.textContent = "event_note";
+	    	    // Div materialize css    	    
+	    	    var collapsBody = document.createElement('div');
+	    	    collapsBody.setAttribute("class","collapsible-body");
+	    	    
+	    	    // Créé la liste des personnes qui vont participer au projet    	    
+	    	    var listPeople = document.createElement('ul');
+	    	    listPeople.setAttribute("class","listPeople");
+	    	    
+	    	    // Créé un formulaire pour exploiter les tick et le php (encore à définir)
+	    	    var form = document.createElement("FORM");
+	    	    
+	    	    // On ajoute chaque noeud à son parent
+	    	    form.appendChild(listPeople);
+	    	    collapsBody.appendChild(form);
+	    	    collapsHeader.appendChild(materialIcons);
+	    	    project.appendChild(collapsHeader);
+	    	    project.appendChild(collapsBody);
+	    	    projectList.appendChild(project);
+	    		
+	    		}        
+        });
+  
+        var data = "idFonction=getIdProject&nomProjet="+nomProjet;
+        ajax1.send(data); 
+	
+	        }        
     });
     
-    var data = "idFonction=addProject&nomProjet="+saisie.value;
+    var data = "idFonction=addProject&nomProjet="+nomProjet;
     ajax.send(data);
-    
-    
-    var idRetourne = 0;
-    //Recupérer l'id du projet généré par le sgbd 
-    var ajax1 = new XMLHttpRequest();
-    ajax1.open('POST', 'php/requete.php', true);
-    ajax1.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-    ajax1.addEventListener('readystatechange',  function(e) {
-        if(ajax1.readyState == 4 && ajax.status == 200) {
-            $idRetourne = parseInt(ajax1.responseText);  
-        }        
-    });
-    
-    
-    var data = "idFonction=addProject&nomProjet="+saisie.value;
-    ajax1.send(data);    
-    
-    // DOM
-    projectList = document.getElementById('Projets');
-			
-	// On créé un élément de la liste = un projet
-    var project = document.createElement('li');
-    
-    
-    
-    // !!! (opt) faire un test pour vérifier que l'id n'est pas nul
-    // On lui donne le même id que celui de la bdd avec le prefix idProjet
-    project.setAttribute("id","idProjet"+idRetourne);
-    
-    // Div materialize css
-    var collapsHeader = document.createElement('div');
-    collapsHeader.setAttribute("class","collapsible-header");
-    collapsHeader.textContent = saisie.value ;
-    
-	// Div materialize css
-    var materialIcons  = document.createElement('i');
-    materialIcons.setAttribute("class","material-icons");
-    materialIcons.textContent = "event_note";
-	// Div materialize css    	    
-    var collapsBody = document.createElement('div');
-    collapsBody.setAttribute("class","collapsible-body");
-	
-	// Créé la liste des personnes qui vont participer au projet    	    
-    var listPeople = document.createElement('ul');
-	listPeople.setAttribute("class","listPeople");
-	
-	// Créé un formulaire pour exploiter les tick et le php (encore à définir)
-	var form = document.createElement("FORM");
-	
-	// On ajoute chaque noeud à son parent
-    form.appendChild(listPeople);
-    collapsBody.appendChild(form);
-    collapsHeader.appendChild(materialIcons);
-    project.appendChild(collapsHeader);
-    project.appendChild(collapsBody);
-	projectList.appendChild(project);
     
 }
 
@@ -190,18 +204,17 @@ function setListeners {
 }
 
 
-// Javascript pour aller chercher les personnes dan sla base d eodonné
+// Javascript pour aller chercher les personnes dans la base de données
 // Regarder l'état des buttons 
 
 
 */
 
+
 fillProjectList();
 //Ajouter un projet
-var avoir_valeur = document.getElementById('nouv_projet');
-var saisie = avoir_valeur.elements["new_projet"];
 
-avoir_valeur.addEventListener('submit', function () { addProject(saisie) });
+document.getElementById('okCreerProjet').addEventListener('click', function () { addProject() });
 
 
 

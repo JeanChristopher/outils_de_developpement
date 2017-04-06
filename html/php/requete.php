@@ -1,56 +1,63 @@
 <?php
 
-function evaluer($connection,$context){
-	switch ($context['idFonction']) {
-		
-	    case "addProject":
-	        addProject($connection,$context['nomProjet']);
-	        break;
-	
-	    case "removeProject":
-	        removeProject($connection,$nomProjet);
-	        break;
-	
-	    case "getPersonnes":
-	        getPersonnes($connection);
-	        break;
-	
-		case "addPersonToProject":
-	        addPersonToProject($connection,$idProject,$nomProjet,$idPersonne,$nomPersonne);
-	        break;
-	
-	 	case "getCurrentProjects":
-	        getCurrentProjects($connection);
-	        break;
+//~ function console($data) {
+	//~ echo("<script>console.log(".$data.");</script>");
+//~ }
+
+//~ console("hello");
+
+function evaluer($connexion,$context){
+    switch ($context['idFonction']){	
+        case"addProject":
+            addProject($connexion,$context['nomProjet']);
+            break;
+    	
+    	case"removeProject" :
+    	    removeProject($connexion,$context['nomProjet']);
+    	    break;
+    	
+    	case"getPersonnes":
+    	    getPersonnes($connexion);
+    	    break;
+    	
+    	case"addPersonToProject":
+    	    addPersonToProject($connexion,$context['idProject'],$context['nomProjet'],$context['idPersonne'],$context['nomPersonne']);
+    	        break;
+    	    
+    	case"getCurrentProjects":
+    	    getCurrentProjects($connexion);
+    	    break;
         
-        case "getIdProject":
-	        getIdProject($connection,$nomProjet);
-	        break;
-	
-		default:
-			throw new Exception('Methode inconnue');
-			break;
-	}
+        case"getIdProject":
+    	    getIdProject($connexion,$context['nomProjet']);
+    	    break;
+    	
+    	default:
+			echo "Exception to put here";
+    	    //throw new Exception('Methode inconnue');
+    	    break;
+		
+		}
 }
 
 //Connexion au serveur
-function connection() {
-	$link = pg_connect ("host=localhost port=5432 dbname=Application user=postgres password=postgres");
+function connexion() {
+	$connexion = pg_connect("host=localhost port=5432 dbname=Application user=postgres password=postgres");
 
-	if(!$link) {
-		die ("Erreur de connexion");
+	if(!$connexion) {
+		die("Erreur de connexion");
 	}
 		else {
-		return $links;
+		return $connexion;
 	}
 }
 
 //TABLE PROJET
 
 // Insertion d'une ligne dans la table projet 
-function addProject($connection,$nomProjet) {
-	$requete = "INSERT INTO Projet VALUES($nomProjet)";
-	$result = pg_query($link,$requete);
+function addProject($connexion,$nomProjet) {
+	$requete = "INSERT INTO projet(nom) VALUES('$nomProjet');";
+	$result = pg_query($connexion,$requete);
 	if (!$result) {
 		echo "Une erreur s'est produite.\n";
 		exit;
@@ -58,49 +65,49 @@ function addProject($connection,$nomProjet) {
 }
 
 // Suppression d'une ligne dans la table 
-function removeProject($connection,$nom) {
+function removeProject($connexion,$nom) {
 	$requete = "DELETE FROM projet WHERE nom LIKE '$nom' ";
-	$result = pg_query($connection,$requete);
+	$result = pg_query($connexion,$requete);
 	if (!$result) {
 		echo "Une erreur s'est produite.\n";
 		exit;
 	}
 }
 
-// Suppression d'une ligne dans la table 
-function getIdProject($connection,$nom) {
+// Recupere id d'un projet 
+function getIdProject($connexion,$nom) {
 	$requete = "SELECT id FROM projet WHERE nom LIKE '$nom'";
-	$result = pg_query($connection,$requete);
+	$result = pg_query($connexion,$requete);
 	if (!$result) {
 		echo "Une erreur s'est produite.\n";
 		exit;
 	}
     else {
-        return pg_fetch_result ($result,0,0)
+        echo json_encode(pg_fetch_result($result,0,0));
     }
 }
 
 //TABLE UTILISATEURS
 
 // Insertion d'une ligne dans la table projet 
-function getPersonnes($connection) {
+function getPersonnes($connexion) {
 	$requete = "SELECT id, nom, prenom, FROM employe";
-	$result = pg_query($connection,$requete);
+	$result = pg_query($connexion,$requete);
 	if (!$result) {
 		echo "Une erreur s'est produite.\n";
 		exit;
 	}
 	else {
-		return pg_fetch_all($result);
+		echo json_encode(pg_fetch_all($result));
 	}
 }
 
 // TABLE PROJETS ET UTILISATEURS
 
 // Ajoute une personne à un projet
-function addPersonToProject($connection,$idProject,$nomProjet,$idPersonne,$nomPersonne) {
-	$requete = "INSERT INTO Projet_en_cours VALUES($idProject,$nomProjet,$idPersonne,$nomPersonne)";
-	$result = pg_query($connection,$requete);
+function addPersonToProject($connexion,$idProject,$nomProjet,$idPersonne,$nomPersonne) {
+	$requete = "INSERT INTO Projet_en_cours() VALUES($idProject,$nomProjet,$idPersonne,$nomPersonne)";
+	$result = pg_query($connexion,$requete);
 	if (!$result) {
 		echo "Une erreur s'est produite.\n";
 		exit;
@@ -108,20 +115,21 @@ function addPersonToProject($connection,$idProject,$nomProjet,$idPersonne,$nomPe
 }
 
 // Recupère tout les projets en cours
-function getCurrentProjects($connection) {
+function getCurrentProjects($connexion) {
 	$requete = "SELECT * FROM Projet_en_cours";
-	$result = pg_query($connection,$requete);
+	$result = pg_query($connexion,$requete);
 	if (!$result) {
 		echo "Une erreur s'est produite.\n";
 		exit;
 	}
 	else {
-		return pg_fetch_all($result);
+		echo json_encode(pg_fetch_all($result));
 	}
 }
 
+$connexion = connexion();
+evaluer($connexion, $_POST);
 
-$link = connection();
-evaluer($link, $_POST);
+
 
 ?>
