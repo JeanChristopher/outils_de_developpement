@@ -62,6 +62,10 @@ function activDesactivBouton(elmtBtn){
 		elmtBtn.className = "waves-effect waves-light btn";
 	}
 }
+
+function reinitBoutonDisabled(elmtBtn){
+	elmtBtn.className = "waves-effect waves-light btn disabled";
+}
 	
 function activDesactivBoutonNewProjet(bouton,nomNewProjet){
 	var elmtBtnCreerProjet = document.getElementById(bouton);
@@ -92,6 +96,10 @@ function InitBtnSuppProjet(){
 	}
 	elmtBtnSuppProjet.className = "waves-effect waves-light btn disabled";
 }
+var elmtBtnSuppProjet = document.getElementById("BtnSuppProjet");
+var elmtBtnAjoutPerso = document.getElementById("BtnAjoutPerso");
+elmtBtnSuppProjet.addEventListener("onclick",reinitBoutonDisabled(elmtBtnSuppProjet));
+
 
 
 // t: current time, b: begInnIng value, c: change In value, d: duration
@@ -625,9 +633,7 @@ if (jQuery) {
           element = getPanelHeader(element);
         }
 		
-		// on récupère l'élément bouton suppr Projet
-		var elmtBtnSuppProjet = document.getElementById("BtnSuppProjet");
-		var elmtBtnAjoutPerso = document.getElementById("BtnAjoutPerso");
+		// on change la visualisation des boutons lorsqu'un bloc est ouvert et inverssement lorsqu'il se ferme
 		activDesactivBouton(elmtBtnSuppProjet);
 		activDesactivBouton(elmtBtnAjoutPerso);
 		
