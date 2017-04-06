@@ -84,14 +84,13 @@ function activDesactivBoutonSupprPerso(checked){
 	}
 }
 
-function test(){
+function InitBtnSuppProjet(){
 	var input = document.getElementsByTagName("input");
 	var elmtBtnSuppProjet = document.getElementById("BtnSuppPerso");
 	for (var i = 0; i < input.length; i++) {
 		input[i].checked = false;
 	}
 	elmtBtnSuppProjet.className = "waves-effect waves-light btn disabled";
-	console.log('ok');
 }
 
 
@@ -631,7 +630,7 @@ if (jQuery) {
 		activDesactivBoutonSupprProjet(elmtBtnSuppProjet);
 		
 		//réinitialisation des checkbox
-		test();
+		InitBtnSuppProjet();
 
 		
 		
