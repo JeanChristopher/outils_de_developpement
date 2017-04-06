@@ -99,7 +99,7 @@ function addProject() {
 		//Vérifie si projet n'existe pas dans la bdd
 		var test;
 		var nomProjet = document.getElementById('nom_new_projet').value;
-		console.log("php ?")
+
     	var ajax2 = new XMLHttpRequest();
         ajax2.open('POST', 'php/requete.php', true);
         ajax2.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
@@ -178,6 +178,7 @@ function addProject() {
 						
 				}
 				else {
+						
 						// !!(opt) Changer la couleur du bouton en rouge
 				}
 
@@ -185,24 +186,40 @@ function addProject() {
         });
   
         var data = "idFonction=checkIfProjectExists&nomProjet="+nomProjet;
-        ajax2.send(data); 
+        ajax2.send(data);
+        
+        // !!(opt) Vider le champs
 }
 
-/*	
-function removeProject(projectList) {
+
+function removeProject() {
 	// On récupère l'objet liste qui contient tout les futurs projets				
-    projectList = document.getElementById('Projets');
-    
+    var projectList = document.getElementById('Projets');
+    var nomProjet = projectList.querySelector('[class="active"]');
     // Trouver le projet actif
     element = projectList.removeChild(projectList.querySelector('[class="active"]'));
+    var idProject = nomProjet.id.replace('idProjet','');
+    // Ne pas oublier de mettre a jour la bdd 
+	var ajax1 = new XMLHttpRequest();
+	ajax1.open('POST', 'php/requete.php', true);
+	ajax1.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+	ajax1.addEventListener('readystatechange',  function(e) {
+		if(ajax1.readyState == 4 && ajax1.status == 200) {
+			
+		}        
+	});
+	
+	var data = "idFonction=removeProject&idProject="+idProject;
+	ajax1.send(data); 
     
-    // Ne pas oublier de mettre a jour la bdd
 }
 
+	
 function addPerson() {
 
 }
 
+/*
 function removePerson() {
 
 }
@@ -226,7 +243,7 @@ fillProjectList();
 //Ajouter un projet
 
 document.getElementById('okCreerProjet').addEventListener('click', function () { addProject() });
-
+document.getElementById('BtnSuppProjet').addEventListener('click', function () { removeProject() });
 
 
 

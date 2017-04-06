@@ -13,7 +13,7 @@ function evaluer($connexion,$context){
             break;
     	
     	case"removeProject" :
-    	    removeProject($connexion,$context['nomProjet']);
+    	    removeProject($connexion,$context['idProject']);
     	    break;
     	
     	case"getPersonnes":
@@ -71,8 +71,8 @@ function addProject($connexion,$nomProjet) {
 }
 
 // Suppression d'une ligne dans la table 
-function removeProject($connexion,$nom) {
-	$requete = "DELETE FROM projet WHERE nom LIKE '$nom' ";
+function removeProject($connexion,$id) {
+	$requete = "DELETE FROM projet WHERE id='$id' ";
 	$result = pg_query($connexion,$requete);
 	if (!$result) {
 		echo "Une erreur s'est produite.\n";
