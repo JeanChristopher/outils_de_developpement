@@ -62,25 +62,25 @@ function fillProjectList() {
     	var form = project.getElementsByTagName("FORM")[0];  	
     	
         // Crée un nouvel élément de liste, correspond à une personne
-        var person = document.createElement('li');
+        var personne = document.createElement('li');
         
         // Créé un élément checkbox pour supprimer ultérieurement une personne
         var input = document.createElement('input');
         input.setAttribute("type","checkbox");
         input.setAttribute("class","filled-in");
-        input.setAttribute("id","idPerson"+arrayOfProjects[i][2]);
+        input.setAttribute("id","idPersonne"+arrayOfProjects[i][2]);
         
         //Créé un élément label obligatoire pour aller avec l'input
     	var label = document.createElement('label');
-    	label.setAttribute("for","idPerson"+arrayOfProjects[i][2]);
+    	label.setAttribute("for","idPersonne"+arrayOfProjects[i][2]);
     	
         // Ajoute le nom au label:
         label.textContent = arrayOfProjects[i][3];
 		
         // Ajoute chaque noeud à son parent 
-        person.appendChild(input);
-        person.appendChild(label);
-        listPeople.appendChild(person);
+        personne.appendChild(input);
+        personne.appendChild(label);
+        listPeople.appendChild(personne);
         form.appendChild(listPeople);
     
 	}
@@ -195,11 +195,14 @@ function addProject() {
 function removeProject() {
 	// On récupère l'objet liste qui contient tout les futurs projets				
     var projectList = document.getElementById('Projets');
-    var nomProjet = projectList.querySelector('[class="active"]');
     // Trouver le projet actif
+    var nomProjet = projectList.querySelector('[class="active"]');
+    // Supprimer le projet
     element = projectList.removeChild(projectList.querySelector('[class="active"]'));
+    
+    //Recupere l'id contenue dans le noeud
     var idProject = nomProjet.id.replace('idProjet','');
-    // Ne pas oublier de mettre a jour la bdd 
+	// Supprime de la bdd
 	var ajax1 = new XMLHttpRequest();
 	ajax1.open('POST', 'php/requete.php', true);
 	ajax1.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
@@ -214,8 +217,52 @@ function removeProject() {
     
 }
 
+function fillPeopleList() {
+
+
+}
 	
-function addPerson() {
+function addPersonne() {
+	// On récupère l'objet liste qui contient tout les futurs projets				
+    var projectList = document.getElementById('Projets');
+    // Trouver le projet actif
+    var nomProjet = projectList.querySelector('[class="active"]');    
+    //Recupere l'id contenue dans le noeud
+    var idProject = nomProjet.id.replace('idProjet','');
+    
+    //Recupère le choix de la personne
+    var e = document.getElementById("selection");
+    //Recupere l'id contenue dans le noeud
+	var idPersonne = e.options[e.selectedIndex].value.replace('idPersonne','');
+	
+    //Vérifie si la personne n'est pas déjà dans le projet
+	//if (!nomProjet.childNodes.indexOf(idPersonne) > -1) {	
+	//} 
+    // On créé un élément de la liste = un projet
+    
+    var personne = document.createElement('li');
+    
+    // Créé un élément checkbox pour supprimer ultérieurement une personne
+    var input = document.createElement('input');
+    input.setAttribute("type","checkbox");
+    input.setAttribute("class","filled-in");
+    input.setAttribute("id","idPersonne"+idPersonne);
+    
+    //Créé un élément label obligatoire pour aller avec l'input
+    var label = document.createElement('label');
+    label.setAttribute("for","idPersonne"+idPersonne);
+    
+    // Ajoute le nom au label:
+    label.textContent = e.options[e.selectedIndex].text;
+    
+    var listPeople = nomProjet.getElementsByClassName("listPeople")[0];
+    // Ajoute chaque noeud à son parent 
+    personne.appendChild(input);
+    personne.appendChild(label);
+    listPeople.appendChild(personne);
+    
+    
+    
 
 }
 
@@ -244,7 +291,7 @@ fillProjectList();
 
 document.getElementById('okCreerProjet').addEventListener('click', function () { addProject() });
 document.getElementById('BtnSuppProjet').addEventListener('click', function () { removeProject() });
-
+document.getElementById('BtnAjoutPerso').addEventListener('click', function () { addPersonne() });
 
 
 
