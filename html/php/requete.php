@@ -28,7 +28,11 @@ function evaluer($connexion,$context){
     	    getCurrentProjects($connexion);
     	    break;
         
-        case"getIdProject":
+        case"checkIfProjectExists":
+    	    checkIfProjectExists($connexion,$context['nomProjet']);
+    	    break;
+    	    
+    	case"getIdProject":
     	    getIdProject($connexion,$context['nomProjet']);
     	    break;
     	
@@ -39,6 +43,8 @@ function evaluer($connexion,$context){
 		
 		}
 }
+
+
 
 //Connexion au serveur
 function connexion() {
@@ -83,24 +89,27 @@ function getIdProject($connexion,$nom) {
 		exit;
 	}
     else {
-        echo json_encode(pg_fetch_result($result,0,0));
+        echo pg_fetch_result($result,0,0);
     }
 }
 
-//TABLE UTILISATEURS
-
-// Insertion d'une ligne dans la table projet 
-function getPersonnes($connexion) {
-	$requete = "SELECT id, nom, prenom, FROM employe";
+//checkIfProjectExists
+function checkIfProjectExists($connexion,$nom) {
+	$requete = "SELECT EXISTS(SELECT 1 FROM projet WHERE nom='$nom');";
 	$result = pg_query($connexion,$requete);
 	if (!$result) {
 		echo "Une erreur s'est produite.\n";
 		exit;
 	}
-	else {
-		echo json_encode(pg_fetch_all($result));
-	}
+    else {
+        echo pg_fetch_result($result,0,0);
+    }
 }
+
+//TABLE UTILISATEURS
+
+// Insertion d'une ligne dans la table utilisateur
+
 
 // TABLE PROJETS ET UTILISATEURS
 
@@ -126,6 +135,7 @@ function getCurrentProjects($connexion) {
 		echo json_encode(pg_fetch_all($result));
 	}
 }
+
 
 $connexion = connexion();
 evaluer($connexion, $_POST);
