@@ -54,7 +54,7 @@ if (typeof(jQuery) === 'undefined') {
 var elmtNomProjet = document.getElementById("nom_new_projet");
 elmtNomProjet.value = "";
 
-function activDesactivBoutonSupprProjet(elmtBtn){
+function activDesactivBouton(elmtBtn){
 	if (elmtBtn.className == "waves-effect waves-light btn"){
 		elmtBtn.className = "waves-effect waves-light btn disabled";
 	}
@@ -627,7 +627,9 @@ if (jQuery) {
 		
 		// on récupère l'élément bouton suppr Projet
 		var elmtBtnSuppProjet = document.getElementById("BtnSuppProjet");
-		activDesactivBoutonSupprProjet(elmtBtnSuppProjet);
+		var elmtBtnAjoutPerso = document.getElementById("BtnAjoutPerso");
+		activDesactivBouton(elmtBtnSuppProjet);
+		activDesactivBouton(elmtBtnAjoutPerso);
 		
 		//réinitialisation des checkbox
 		InitBtnSuppProjet();
