@@ -79,9 +79,10 @@ function activDesactivBoutonNewProjet(bouton,nomNewProjet){
 }
 
 function activDesactivBoutonSupprPerso(){
+	console.log("ok");
 	var projectList = document.getElementById('Projets');
-    var nomProjet = projectList.querySelector('[class="active"]');
-    var checkedBoxes = nomProjet.querySelectorAll('input[class=filled-in]:checked');
+	var nomProjet = projectList.querySelector('[class="active"]');
+	var checkedBoxes = nomProjet.querySelectorAll('input[class=filled-in]:checked');	
 	if (checkedBoxes.length == 0){
 		elmtBtnSupprPerso.className = "waves-effect waves-light btn disabled";
 	}
@@ -102,7 +103,11 @@ function InitBtnSuppProjet(){
 var elmtBtnSuppProjet = document.getElementById("BtnSuppProjet");
 var elmtBtnAjoutPerso = document.getElementById("BtnAjoutPerso");
 var elmtBtnSupprPerso = document.getElementById("BtnSuppPerso");
-
+var checkBoxes = document.getElementsByClassName("filled-in");
+for (i=0; i<checkBoxes.length;i++){
+	console.log(checkBoxes[i]);
+	checkBoxes[i].addEventListener("click",activDesactivBoutonSupprPerso);
+}
 
 
 
