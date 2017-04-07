@@ -79,7 +79,6 @@ function activDesactivBoutonNewProjet(bouton,nomNewProjet){
 }
 
 function activDesactivBoutonSupprPerso(){
-	console.log("ok");
 	var projectList = document.getElementById('Projets');
 	var nomProjet = projectList.querySelector('[class="active"]');
 	var checkedBoxes = nomProjet.querySelectorAll('input[class=filled-in]:checked');	
@@ -92,22 +91,23 @@ function activDesactivBoutonSupprPerso(){
 }
 
 function InitBtnSuppProjet(){
-	var input = document.getElementsByTagName("input");
-	var elmtBtnSuppProjet = document.getElementById("BtnSuppPerso");
-	for (var i = 0; i < input.length; i++) {
-		input[i].checked = false;
+	var projectList = document.getElementById('Projets');
+	var nomProjet = projectList.querySelector('[class="active"]');
+	if (nomProjet){
+		elmtBtnSuppProjet.className = "waves-effect waves-light btn";
+		elmtBtnAjoutPerso.className = "waves-effect waves-light btn";
+		console.log("ouvert");
 	}
-	elmtBtnSuppProjet.className = "waves-effect waves-light btn disabled";
+	else{
+		elmtBtnSuppProjet.className = "waves-effect waves-light btn disabled";
+		elmtBtnAjoutPerso.className = "waves-effect waves-light btn disabled";
+	}
 }
 	
 var elmtBtnSuppProjet = document.getElementById("BtnSuppProjet");
 var elmtBtnAjoutPerso = document.getElementById("BtnAjoutPerso");
 var elmtBtnSupprPerso = document.getElementById("BtnSuppPerso");
 var checkBoxes = document.getElementsByClassName("filled-in");
-//~ for (i=0; i<checkBoxes.length;i++){
-	//~ console.log(checkBoxes[i]);
-	//~ checkBoxes[i].addEventListener("click",activDesactivBoutonSupprPerso);
-//~ } mis à jour dans l'organisateur
 
 
 
@@ -582,15 +582,11 @@ if (jQuery) {
           if (typeof(options.onOpen) === "function") {
             options.onOpen.call(this, object.parent());
           }
-		  elmtBtnSuppProjet.className = "waves-effect waves-light btn";
-		  elmtBtnAjoutPerso.className = "waves-effect waves-light btn";
         } else {
           if (typeof(options.onClose) === "function") {
             options.onClose.call(this, object.parent());
 			
           }
-		  elmtBtnSuppProjet.className = "waves-effect waves-light btn disabled";
-		  elmtBtnAjoutPerso.className = "waves-effect waves-light btn disabled";
         }
       }
 
@@ -648,11 +644,12 @@ if (jQuery) {
 	
 		
 		//réinitialisation des checkbox
-		InitBtnSuppProjet();
+		
 
 		
 		
         collapsibleOpen(element);
+		InitBtnSuppProjet();
       });
 
 
