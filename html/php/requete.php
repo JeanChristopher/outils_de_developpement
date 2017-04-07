@@ -126,10 +126,11 @@ function addPersonToProject($connexion,$idProject,$idPersonne) {
 		exit;
 	}
 
+}
 
 // Retirer une personne à d'un projet
-function addPersonToProject($connexion,$idProject,$idPersonne) {
-	$requete = "INSERT INTO Projet_en_cours(id_projet,id_employe) VALUES($idProject,$idPersonne)";
+function removePersonFromProject($connexion,$idPersonne) {
+	$requete = "DELETE FROM Projet_en_cours employe WHERE id_employe='$idPersonne'";
 	$result = pg_query($connexion,$requete);
 	if (!$result) {
 		echo "Une erreur s'est produite.\n";

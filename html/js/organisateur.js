@@ -68,7 +68,7 @@ function fillProjectList() {
         var input = document.createElement('input');
         input.setAttribute("type","checkbox");
         input.setAttribute("class","filled-in");
-        input.setAttribute("onchange","activDesactivBoutonSupprPerso(this.checked)");
+        input.setAttribute("onclick","activDesactivBoutonSupprPerso(this.checked)");
         input.setAttribute("id","idPersonne"+arrayOfProjects[i][2]);
         
         //Créé un élément label obligatoire pour aller avec l'input
@@ -240,15 +240,17 @@ function addPersonne() {
     //Vérifie si la personne n'est pas déjà dans le projet
 	//if (!nomProjet.childNodes.indexOf(idPersonne) > -1) {	
 	//} 
+	// -> Regarder si on ne peut pas retirer tout les éléments présents de la liste des choix
+	
     // On créé un élément de la liste = un projet
-    
+    console.log("test pour vérifier pourquoi creation de n personne parfois...")
     var personne = document.createElement('li');
     
     // Créé un élément checkbox pour supprimer ultérieurement une personne
     var input = document.createElement('input');
     input.setAttribute("type","checkbox");
     input.setAttribute("class","filled-in");
-    input.setAttribute("onchange","activDesactivBoutonSupprPerso(this.checked)");
+    input.setAttribute("onclick","activDesactivBoutonSupprPerso(this.checked)");
     input.setAttribute("id","idPersonne"+idPersonne);
     
     //Créé un élément label obligatoire pour aller avec l'input
@@ -276,14 +278,11 @@ function addPersonne() {
 	var data = "idFonction=addPersonToProject&idProject="+idProject+"&idPersonne="+idPersonne;
 	ajax1.send(data); 
     
-    
-    
-    
-
 }
 
 
 function removePersonne() {
+	
 	// On récupère l'objet liste qui contient tout les futurs projets				
     var projectList = document.getElementById('Projets');
     // Trouver le projet actif
@@ -293,12 +292,15 @@ function removePersonne() {
     for (var i = 0; i < checkedBoxes.length; i++){
 		console.log(checkedBoxes[i])
 	}
-	//nomProjet.removeChild(projectList.querySelectorAll('input[class=filled-in]:checked'));
+	nomProjet.removeChild(projectList.querySelectorAll('input[class=filled-in]:checked'));
     
     //Recupere l'id contenue dans le noeud
 	
 	// Supprime de la bdd
-	/*
+	
+	// Faire 
+	
+	
 	var ajax1 = new XMLHttpRequest();
 	ajax1.open('POST', 'php/requete.php', true);
 	ajax1.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
@@ -308,9 +310,9 @@ function removePersonne() {
 		}        
 	});
 	
-	var data = "idFonction=removeProject&idProject="+idProject;
+	var data = "idFonction=removePersonFromProject&idProject="+idPersonne;
 	ajax1.send(data); 
-    */
+    
 }
 /*
 
