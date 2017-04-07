@@ -25,7 +25,7 @@ function evaluer($connexion,$context){
     	        break;
     	    	
     	case"removePersonFromProject":
-    	    removePersonFromProject($connexion,$context['idPersonne']);
+    	    removePersonFromProject($connexion,$context['idsPersonne']);
     	        break;
     	    
     	case"getCurrentProjects":
@@ -129,8 +129,8 @@ function addPersonToProject($connexion,$idProject,$idPersonne) {
 }
 
 // Retirer une personne à d'un projet
-function removePersonFromProject($connexion,$idPersonne) {
-	$requete = "DELETE FROM Projet_en_cours employe WHERE id_employe='$idPersonne'";
+function removePersonFromProject($connexion,$idsPersonne) {
+	$requete = "DELETE FROM Projet_en_cours employe WHERE id_employe in $idsPersonne";
 	$result = pg_query($connexion,$requete);
 	if (!$result) {
 		echo "Une erreur s'est produite.\n";

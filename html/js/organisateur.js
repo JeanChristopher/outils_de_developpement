@@ -289,17 +289,16 @@ function removePersonne() {
     var nomProjet = projectList.querySelector('[class="active"]');
     // Supprimer le projet
     var checkedBoxes = nomProjet.querySelectorAll('input[class=filled-in]:checked');
-    console.log(checkedBoxes)
-    for (var i = 0; i < checkedBoxes.length; i++){
-		checkedBoxes[i].parentNode.removeChild(checkedBoxes[i]);
+
+	var projetToRemove = '(';
+	for (var i = 0; i < checkedBoxes.length; i++){
+		//checkedBoxes[i].value.replace('idPersonne','');
+		projetToRemove = projetToRemove + String(checkedBoxes[i].getAttribute("id").replace('idPersonne','')+",");
 	}
-    
-    // Recupere l'id contenue dans le noeud
+	//Retire la derniere virgule
+	projetToRemove = projetToRemove.slice(0,-1) + ')'
 	
-	// Supprime de la bdd
-	
-	// Faire une boucle pour chaque à supprimer
-	
+	console.log(projetToRemove)
 	
 	var ajax1 = new XMLHttpRequest();
 	ajax1.open('POST', 'php/requete.php', true);
@@ -310,8 +309,12 @@ function removePersonne() {
 		}        
 	});
 	
-	var data = "idFonction=removePersonFromProject&idProject="+idPersonne;
+	var data = "idFonction=removePersonFromProject&idsPersonne="+projetToRemove;
 	ajax1.send(data); 
+    
+    //~ for (var i = 0; i < checkedBoxes.length; i++){
+		//~ checkedBoxes[i].parentNode.parentNode.removeChild(checkedBoxes[i].parentNode);
+	//~ }
     
 }
 /*
