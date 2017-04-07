@@ -289,8 +289,9 @@ function removePersonne() {
     var nomProjet = projectList.querySelector('[class="active"]');
     // Supprimer le projet
     var checkedBoxes = nomProjet.querySelectorAll('input[class=filled-in]:checked');
+    console.log(checkedBoxes)
     for (var i = 0; i < checkedBoxes.length; i++){
-		nomProjet.removeChild(checkedBoxes[i])
+		checkedBoxes[i].parentNode.removeChild(checkedBoxes[i]);
 	}
     
     // Recupere l'id contenue dans le noeud
