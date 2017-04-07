@@ -77,14 +77,17 @@ function activDesactivBoutonNewProjet(bouton,nomNewProjet){
 		elmtBtnCreerProjet.className = "waves-effect waves-light btn";
 	}
 }
-
+var compteur = 0;
 function activDesactivBoutonSupprPerso(checked){
 	var elmtBtnSuppProjet = document.getElementById("BtnSuppPerso");
 	if (checked){
+		compteur = compteur + 1;
 		elmtBtnSuppProjet.className = "waves-effect waves-light btn";
 	}
 	else{
-		elmtBtnSuppProjet.className = "waves-effect waves-light btn disabled";
+		compteur = compteur - 1;
+		if(compteur == 0){
+		elmtBtnSuppProjet.className = "waves-effect waves-light btn disabled";}
 	}
 }
 
