@@ -68,8 +68,8 @@ function fillProjectList() {
         var input = document.createElement('input');
         input.setAttribute("type","checkbox");
         input.setAttribute("class","filled-in");
-        input.setAttribute("onclick","activDesactivBoutonSupprPerso(this.checked)");
         input.setAttribute("id","idPersonne"+arrayOfProjects[i][2]);
+        input.addEventListener("click",activDesactivBoutonSupprPerso);
         
         //Créé un élément label obligatoire pour aller avec l'input
     	var label = document.createElement('label');
@@ -250,8 +250,8 @@ function addPersonne() {
     var input = document.createElement('input');
     input.setAttribute("type","checkbox");
     input.setAttribute("class","filled-in");
-    input.setAttribute("onclick","activDesactivBoutonSupprPerso(this.checked)");
     input.setAttribute("id","idPersonne"+idPersonne);
+    input.addEventListener("click",activDesactivBoutonSupprPerso);
     
     //Créé un élément label obligatoire pour aller avec l'input
     var label = document.createElement('label');
@@ -290,15 +290,14 @@ function removePersonne() {
     // Supprimer le projet
     var checkedBoxes = nomProjet.querySelectorAll('input[class=filled-in]:checked');
     for (var i = 0; i < checkedBoxes.length; i++){
-		console.log(checkedBoxes[i])
+		nomProjet.removeChild(checkedBoxes[i])
 	}
-	nomProjet.removeChild(projectList.querySelectorAll('input[class=filled-in]:checked'));
     
-    //Recupere l'id contenue dans le noeud
+    // Recupere l'id contenue dans le noeud
 	
 	// Supprime de la bdd
 	
-	// Faire 
+	// Faire une boucle pour chaque à supprimer
 	
 	
 	var ajax1 = new XMLHttpRequest();

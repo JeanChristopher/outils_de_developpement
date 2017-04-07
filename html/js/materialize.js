@@ -104,10 +104,10 @@ var elmtBtnSuppProjet = document.getElementById("BtnSuppProjet");
 var elmtBtnAjoutPerso = document.getElementById("BtnAjoutPerso");
 var elmtBtnSupprPerso = document.getElementById("BtnSuppPerso");
 var checkBoxes = document.getElementsByClassName("filled-in");
-for (i=0; i<checkBoxes.length;i++){
-	console.log(checkBoxes[i]);
-	checkBoxes[i].addEventListener("click",activDesactivBoutonSupprPerso);
-}
+//~ for (i=0; i<checkBoxes.length;i++){
+	//~ console.log(checkBoxes[i]);
+	//~ checkBoxes[i].addEventListener("click",activDesactivBoutonSupprPerso);
+//~ } mis à jour dans l'organisateur
 
 
 
