@@ -77,17 +77,16 @@ function activDesactivBoutonNewProjet(bouton,nomNewProjet){
 		elmtBtnCreerProjet.className = "waves-effect waves-light btn";
 	}
 }
-var compteur = 0;
-function activDesactivBoutonSupprPerso(checked){
-	var elmtBtnSuppProjet = document.getElementById("BtnSuppPerso");
-	if (checked){
-		compteur = compteur + 1;
-		elmtBtnSuppProjet.className = "waves-effect waves-light btn";
+
+function activDesactivBoutonSupprPerso(){
+	var projectList = document.getElementById('Projets');
+    var nomProjet = projectList.querySelector('[class="active"]');
+    var checkedBoxes = nomProjet.querySelectorAll('input[class=filled-in]:checked');
+	if (checkedBoxes.length == 0){
+		elmtBtnSupprPerso.className = "waves-effect waves-light btn disabled";
 	}
 	else{
-		compteur = compteur - 1;
-		if(compteur == 0){
-		elmtBtnSuppProjet.className = "waves-effect waves-light btn disabled";}
+		elmtBtnSupprPerso.className = "waves-effect waves-light btn";
 	}
 }
 
@@ -102,6 +101,7 @@ function InitBtnSuppProjet(){
 	
 var elmtBtnSuppProjet = document.getElementById("BtnSuppProjet");
 var elmtBtnAjoutPerso = document.getElementById("BtnAjoutPerso");
+var elmtBtnSupprPerso = document.getElementById("BtnSuppPerso");
 
 
 
