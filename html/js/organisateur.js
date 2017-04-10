@@ -231,24 +231,42 @@ function removeProject() {
 	ajax1.send(data); 
     
 }
-
 // Charge la liste des personnes
 function fillPeopleList() {
     
-    var listPerson;
+    var features;
+    var nom;
     
     var ajax1 = new XMLHttpRequest();
 	ajax1.open('POST', 'php/requete.php', true);
 	ajax1.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 	ajax1.addEventListener('readystatechange',  function(e) {
 		if(ajax1.readyState == 4 && ajax1.status == 200) {
-			listPerson = ajax1.responseText
+            features = JSON.parse(ajax1.responseText);
+            var option = document.getElementById("selection")
+              
+            for (var i = 0; i < features.length; i++ ){
+
+                  var personne = document.createElement('option');
+                  personne.setAttribute("value","idPersonne"+features[i].id);
+                  personne.textContent= features[i].nom+" "+features[i].prenom;
+                  console.log(personne);
+                  option.appendChild(personne);
+                  
+                    
+            }
+              $(document).ready(function() {
+    $('select').material_select();
+  });
+    
+
 		}        
 	});
 	
 	var data = "idFonction=addPersonTolist";
 	ajax1.send(data); 
     
+
 
 }
 
