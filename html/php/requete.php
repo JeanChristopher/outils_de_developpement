@@ -1,5 +1,9 @@
 <?php
 
+UPDATE projet_en_cours
+SET nom_projet = (select nom from projet where projet_en_cours.id_projet = projet.id), nom_employe = (select nom from employe where projet_en_cours.id_employe = employe.id)
+
+
 //~ function console($data) {
 	//~ echo("<script>console.log(".$data.");</script>");
 //~ }
