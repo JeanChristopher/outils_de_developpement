@@ -43,9 +43,13 @@ function evaluer($connexion,$context){
     	case"getIdProject":
     	    getIdProject($connexion,$context['nomProjet']);
     	    break;
+		  
+	case"addPersonTolist":
+    	    addPersonTolist($connexion);
+    	    break;
     	
     	default:
-			echo "Exception to put here";
+		echo "Exception to put here";
     	    //throw new Exception('Methode inconnue');
     	    break;
 		
@@ -155,10 +159,23 @@ function getCurrentProjects($connexion) {
 	}
 }
 
+function addPersonTolist($connexion){
+    $requete= "SELECT nom, prenom FROM employe";
+    $result= pg_query($connexion, $requete);
+    if (!$result){
+        echo "Une erreur s'est produite.\n";
+		exit;
+	}
+    else{
+        echo json_encode(pg_fetch_all($result));
+
+    }
+}
+
 
 $connexion = connexion();
 evaluer($connexion, $_POST);
 
-
+addPersonTolist($connexion);
 
 ?>
