@@ -96,12 +96,12 @@ function InitBtnSuppProjet(){
 	if (nomProjet){
 		elmtBtnSuppProjet.className = "waves-effect waves-light btn";
 		elmtBtnAjoutPerso.className = "waves-effect waves-light btn";
-		console.log("ouvert");
-	}
-	else{
-		console.log("fermé");
 	}
 }
+function initBoutonNewProjet(bouton){
+	var elmtBouton = document.getElementById(bouton);
+	elmtBouton.className = "waves-effect waves-light btn disabled";
+	}
 	
 var elmtBtnSuppProjet = document.getElementById("BtnSuppProjet");
 var elmtBtnAjoutPerso = document.getElementById("BtnAjoutPerso");
@@ -110,6 +110,8 @@ var checkBoxes = document.getElementsByClassName("filled-in");
 var elmtBtnAjoutProjet = document.getElementById("okCreerProjet");
 var elmtNomNewProjet = document.getElementById("nom_new_projet");
 elmtNomNewProjet.value = "";
+
+//elmtBtnAjoutProjet.addEventListener("onclick", initBoutonNewProjet());
 
 
 

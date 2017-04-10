@@ -208,8 +208,9 @@ function addProject() {
         ajax2.send(data);
         var elmtNomNewProjet = document.getElementById("nom_new_projet");
 		elmtNomNewProjet.value = "";
+		elmtNomNewProjet.className="validate";
 		var elmtBtnAjoutPerso = document.getElementById("BtnAjoutPerso");
-		elmtBtnAjoutPerso.className = "waves-effect waves-light btn disabled";
+		//elmtBtnAjoutPerso.className = "waves-effect waves-light btn disabled";
         
         // !!(opt) Vider le champs
 }
