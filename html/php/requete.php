@@ -178,6 +178,4 @@ function addPersonTolist($connexion){
 $connexion = connexion();
 evaluer($connexion, $_POST);
 
-addPersonTolist($connexion);
-
 ?>
