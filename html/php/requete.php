@@ -119,7 +119,7 @@ function checkIfProjectExists($connexion,$nom) {
 // Ajoute une personne à un projet
 function addPersonToProject($connexion,$idProject,$idPersonne) {
 	$requete = "INSERT INTO Projet_en_cours(id_projet,id_employe) VALUES($idProject,$idPersonne);UPDATE projet_en_cours
-SET nom_projet = (select nom from projet where projet_en_cours.id_projet = projet.id), nom_employe = (select nom from employe where projet_en_cours.id_employe = employe.id)
+SET nom_projet = (select nom from projet where projet_en_cours.id_projet = projet.id), nom_employe = (select nom from employe where projet_en_cours.id_employe = employe.id),prenom_employe = (select prenom from employe where projet_en_cours.id_employe = employe.id)
 ;";
 	$result = pg_query($connexion,$requete);
 	if (!$result) {

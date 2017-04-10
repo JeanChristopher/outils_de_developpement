@@ -15,7 +15,7 @@ function fillProjectList() {
             var option = document.getElementById("selection")
             
             for (var i = 0; i < features.length; i++ ){
-				  arrayOfProjects.push([features[i].id_projet,features[i].nom_projet,features[i].id_employe,features[i].nom_employe]);
+				  arrayOfProjects.push([features[i].id_projet,features[i].nom_projet,features[i].id_employe,features[i].nom_employe,features[i].prenom_employe]);
                   
                     
             }
@@ -85,7 +85,7 @@ function fillProjectList() {
     	label.setAttribute("for","idPersonne"+arrayOfProjects[i][2]);
     	
         // Ajoute le nom au label:
-        label.textContent = arrayOfProjects[i][3];
+        label.textContent = arrayOfProjects[i][3]+" "+arrayOfProjects[i][4];
 		
         // Ajoute chaque noeud à son parent 
         personne.appendChild(input);
