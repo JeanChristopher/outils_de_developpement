@@ -109,9 +109,7 @@ var elmtBtnSupprPerso = document.getElementById("BtnSuppPerso");
 var checkBoxes = document.getElementsByClassName("filled-in");
 var elmtBtnAjoutProjet = document.getElementById("okCreerProjet");
 var elmtNomNewProjet = document.getElementById("nom_new_projet");
-//var elmtLabelNomProjet = document.getElementById("labelNomProjet");
 elmtNomNewProjet.value = "";
-//elmtLabelNomProjet.addEventListener("onclick",activDesactivBoutonSupprPerso());
 
 
 

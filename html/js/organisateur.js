@@ -2,104 +2,108 @@
 // Charge la liste des projets 
 function fillProjectList() {
 	
-	var arrayOfProjects;
-	
+	var arrayOfProjects =new Array();
+    var features;
+    var nom;
+    
     var ajax1 = new XMLHttpRequest();
 	ajax1.open('POST', 'php/requete.php', true);
 	ajax1.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 	ajax1.addEventListener('readystatechange',  function(e) {
 		if(ajax1.readyState == 4 && ajax1.status == 200) {
-			arrayOfProjects = JSON.parse(ajax1.responseText);
-			var features = jsonObj.features;
-			for (var i=0; i < features.lenght; i++) {
-				
-			}
+            features = JSON.parse(ajax1.responseText);
+            var option = document.getElementById("selection")
+            
+            for (var i = 0; i < features.length; i++ ){
+				  arrayOfProjects.push([features[i].id_projet,features[i].nom_projet,features[i].id_employe,features[i].nom_employe]);
+                  
+                    
+            }
+            
+             // On récupère l'objet liste qui contient tout les futurs projets				
+    projectList = document.getElementById('Projets');
+    
+    // boucle sur le tableau de la bdd
+    for(var i = 0; i < arrayOfProjects.length; i++) {
+		
+    	//Si le projet n'exite pas
+    	if (!document.getElementById("idProjet"+arrayOfProjects[i][0])) {
 			
+			// On créé un élément de la liste = un projet
+    	    var project = document.createElement('li');
+    	    // On lui donne le même id que celui de la bdd avec le prefix idProjet
+    	    project.setAttribute("id","idProjet"+arrayOfProjects[i][0]);
+    	    
+    	    // Div materialize css
+    	    var collapsHeader = document.createElement('div');
+    	    collapsHeader.setAttribute("class","collapsible-header");
+    	    collapsHeader.textContent = arrayOfProjects[i][1];
+    	    
+			// Div materialize css
+    	    var materialIcons  = document.createElement('i');
+    	    materialIcons.setAttribute("class","material-icons");
+    	    materialIcons.textContent = "event_note";
+			// Div materialize css    	    
+    	    var collapsBody = document.createElement('div');
+    	    collapsBody.setAttribute("class","collapsible-body");
+			
+			// Créé la liste des personnes qui vont participer au projet    	    
+    	    var listPeople = document.createElement('ul');
+			listPeople.setAttribute("class","listPeople");
+			
+			// Créé un formulaire pour exploiter les tick et le php (encore à définir)
+			var form = document.createElement("FORM");
+			
+			// On ajoute chaque noeud à son parent
+    	    form.appendChild(listPeople);
+    	    collapsBody.appendChild(form);
+    		collapsHeader.appendChild(materialIcons);
+    		project.appendChild(collapsHeader);
+    		project.appendChild(collapsBody);
+			projectList.appendChild(project);
+    	}
+    	
+
+    	// On récupère les variables sur lequels on travaille
+    	var project = document.getElementById("idProjet"+arrayOfProjects[i][0]);
+    	var listPeople = project.getElementsByClassName("listPeople")[0];
+    	var collapsBody = project.getElementsByClassName("collapsible-body")[0];
+    	var form = project.getElementsByTagName("FORM")[0];  	
+    	
+        // Crée un nouvel élément de liste, correspond à une personne
+        var personne = document.createElement('li');
+        
+        // Créé un élément checkbox pour supprimer ultérieurement une personne
+        var input = document.createElement('input');
+        input.setAttribute("type","checkbox");
+        input.setAttribute("class","filled-in");
+        input.setAttribute("id","idPersonne"+arrayOfProjects[i][2]);
+        input.addEventListener("click",activDesactivBoutonSupprPerso);
+        
+        //Créé un élément label obligatoire pour aller avec l'input
+    	var label = document.createElement('label');
+    	label.setAttribute("for","idPersonne"+arrayOfProjects[i][2]);
+    	
+        // Ajoute le nom au label:
+        label.textContent = arrayOfProjects[i][3];
+		
+        // Ajoute chaque noeud à son parent 
+        personne.appendChild(input);
+        personne.appendChild(label);
+        listPeople.appendChild(personne);
+        form.appendChild(listPeople);
+    
+	}
+            
+            
+            
 
 		}        
 	});
 	
 	var data = "idFonction=getCurrentProjects";
-	ajax1.send(data);
+	ajax1.send(data);	
 	
-	// tableau de test
-
-    //~ // On récupère l'objet liste qui contient tout les futurs projets				
-    //~ projectList = document.getElementById('Projets');
-    //~ 
-    //~ // boucle sur le tableau de la bdd
-    //~ for(var i = 0; i < arrayOfProjects.length; i++) {
-		//~ 
-    	//~ //Si le projet n'exite pas
-    	//~ if (!document.getElementById("idProjet"+arrayOfProjects[i][0])) {
-			//~ 
-			//~ // On créé un élément de la liste = un projet
-    	    //~ var project = document.createElement('li');
-    	    //~ // On lui donne le même id que celui de la bdd avec le prefix idProjet
-    	    //~ project.setAttribute("id","idProjet"+arrayOfProjects[i][0]);
-    	    //~ 
-    	    //~ // Div materialize css
-    	    //~ var collapsHeader = document.createElement('div');
-    	    //~ collapsHeader.setAttribute("class","collapsible-header");
-    	    //~ collapsHeader.textContent = arrayOfProjects[i][1];
-    	    //~ 
-			//~ // Div materialize css
-    	    //~ var materialIcons  = document.createElement('i');
-    	    //~ materialIcons.setAttribute("class","material-icons");
-    	    //~ materialIcons.textContent = "event_note";
-			//~ // Div materialize css    	    
-    	    //~ var collapsBody = document.createElement('div');
-    	    //~ collapsBody.setAttribute("class","collapsible-body");
-			//~ 
-			//~ // Créé la liste des personnes qui vont participer au projet    	    
-    	    //~ var listPeople = document.createElement('ul');
-			//~ listPeople.setAttribute("class","listPeople");
-			//~ 
-			//~ // Créé un formulaire pour exploiter les tick et le php (encore à définir)
-			//~ var form = document.createElement("FORM");
-			//~ 
-			//~ // On ajoute chaque noeud à son parent
-    	    //~ form.appendChild(listPeople);
-    	    //~ collapsBody.appendChild(form);
-    		//~ collapsHeader.appendChild(materialIcons);
-    		//~ project.appendChild(collapsHeader);
-    		//~ project.appendChild(collapsBody);
-			//~ projectList.appendChild(project);
-    	//~ }
-    	//~ 
-//~ 
-    	//~ // On récupère les variables sur lequels on travaille
-    	//~ var project = document.getElementById("idProjet"+arrayOfProjects[i][0]);
-    	//~ var listPeople = project.getElementsByClassName("listPeople")[0];
-    	//~ var collapsBody = project.getElementsByClassName("collapsible-body")[0];
-    	//~ var form = project.getElementsByTagName("FORM")[0];  	
-    	//~ 
-        //~ // Crée un nouvel élément de liste, correspond à une personne
-        //~ var personne = document.createElement('li');
-        //~ 
-        //~ // Créé un élément checkbox pour supprimer ultérieurement une personne
-        //~ var input = document.createElement('input');
-        //~ input.setAttribute("type","checkbox");
-        //~ input.setAttribute("class","filled-in");
-        //~ input.setAttribute("id","idPersonne"+arrayOfProjects[i][2]);
-        //~ input.addEventListener("click",activDesactivBoutonSupprPerso);
-        //~ 
-        //~ //Créé un élément label obligatoire pour aller avec l'input
-    	//~ var label = document.createElement('label');
-    	//~ label.setAttribute("for","idPersonne"+arrayOfProjects[i][2]);
-    	//~ 
-        //~ // Ajoute le nom au label:
-        //~ label.textContent = arrayOfProjects[i][3];
-		//~ 
-        //~ // Ajoute chaque noeud à son parent 
-        //~ personne.appendChild(input);
-        //~ personne.appendChild(label);
-        //~ listPeople.appendChild(personne);
-        //~ form.appendChild(listPeople);
-    //~ 
-	//~ }
-	//~ 
-	//~ 
 }
 
 // Ajoute un projet dans  la liste des projets
@@ -202,6 +206,10 @@ function addProject() {
   
         var data = "idFonction=checkIfProjectExists&nomProjet="+nomProjet;
         ajax2.send(data);
+        var elmtNomNewProjet = document.getElementById("nom_new_projet");
+		elmtNomNewProjet.value = "";
+		var elmtBtnAjoutPerso = document.getElementById("BtnAjoutPerso");
+		elmtBtnAjoutPerso.className = "waves-effect waves-light btn disabled";
         
         // !!(opt) Vider le champs
 }
@@ -228,7 +236,12 @@ function removeProject() {
 	});
 	
 	var data = "idFonction=removeProject&idProject="+idProject;
-	ajax1.send(data); 
+	ajax1.send(data);
+	var elmtBtnSuppProjet = document.getElementById("BtnSuppProjet");
+	var elmtBtnAjoutPerso = document.getElementById("BtnAjoutPerso");
+	
+	elmtBtnSuppProjet.className = "waves-effect waves-light btn disabled";
+	elmtBtnAjoutPerso.className = "waves-effect waves-light btn disabled"; 
     
 }
 // Charge la liste des personnes
@@ -256,8 +269,8 @@ function fillPeopleList() {
                     
             }
               $(document).ready(function() {
-    $('select').material_select();
-  });
+					$('select').material_select();
+				});
     
 
 		}        
@@ -362,9 +375,15 @@ function removePersonne() {
     for (var i = 0; i < checkedBoxes.length; i++){
 		checkedBoxes[i].parentNode.parentNode.removeChild(checkedBoxes[i].parentNode);
 	}
+	var elmtBtnSupprPerso = document.getElementById("BtnSuppPerso");
+	elmtBtnSupprPerso.className = "waves-effect waves-light btn disabled";
     
 }
+
+fillProjectList()
 fillPeopleList();
+
+
 // Listeners sur les boutons
 document.getElementById('okCreerProjet').addEventListener('click', function () { addProject() });
 document.getElementById('BtnSuppProjet').addEventListener('click', function () { removeProject() });
