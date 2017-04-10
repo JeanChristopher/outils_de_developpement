@@ -74,7 +74,7 @@ function addProject($connexion,$nomProjet) {
 	}
 }
 
-// Suppression d'une ligne dans la table 
+// Suppression d'un projet 
 function removeProject($connexion,$id) {
 	$requete = "DELETE FROM projet WHERE id='$id' ";
 	$result = pg_query($connexion,$requete);
@@ -97,7 +97,7 @@ function getIdProject($connexion,$nom) {
     }
 }
 
-//checkIfProjectExists
+// Verifie si le projet existe
 function checkIfProjectExists($connexion,$nom) {
 	$requete = "SELECT EXISTS(SELECT 1 FROM projet WHERE nom='$nom');";
 	$result = pg_query($connexion,$requete);
@@ -128,7 +128,7 @@ function addPersonToProject($connexion,$idProject,$idPersonne) {
 
 }
 
-// Retirer une personne à d'un projet
+// Retire une personne d'un projet
 function removePersonFromProject($connexion,$idsPersonne) {
 	$requete = "DELETE FROM Projet_en_cours employe WHERE id_employe in $idsPersonne";
 	$result = pg_query($connexion,$requete);
@@ -138,7 +138,7 @@ function removePersonFromProject($connexion,$idsPersonne) {
 	}
 }
 
-// Recupère tout les projets en cours
+// Recupere tout les projets en cours
 function getCurrentProjects($connexion) {
 	$requete = "SELECT * FROM Projet_en_cours";
 	$result = pg_query($connexion,$requete);

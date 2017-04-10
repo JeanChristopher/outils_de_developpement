@@ -1,5 +1,5 @@
 
-
+// Charge la liste des projets 
 function fillProjectList() {
 	
 
@@ -89,7 +89,7 @@ function fillProjectList() {
 	
 }
 
-
+// Ajoute un projet dans  la liste des projets
 function addProject() {
 				
 	//    Il y a 3 requetes ajax imbriquées :
@@ -193,7 +193,7 @@ function addProject() {
         // !!(opt) Vider le champs
 }
 
-
+//Retire un projet
 function removeProject() {
 	// On récupère l'objet liste qui contient tout les futurs projets				
     var projectList = document.getElementById('Projets');
@@ -219,11 +219,13 @@ function removeProject() {
     
 }
 
+// Charge la liste des personnes
 function fillPeopleList() {
 
 
 }
-	
+
+// Ajoute une personne a projet 	
 function addPersonne() {
 	// On récupère l'objet liste qui contient tout les futurs projets				
     var projectList = document.getElementById('Projets');
@@ -280,7 +282,7 @@ function addPersonne() {
     
 }
 
-
+// Retire une personne
 function removePersonne() {
 	
 	// On récupère l'objet liste qui contient tout les futurs projets				
@@ -312,30 +314,13 @@ function removePersonne() {
 	var data = "idFonction=removePersonFromProject&idsPersonne="+projetToRemove;
 	ajax1.send(data); 
     
-    //~ for (var i = 0; i < checkedBoxes.length; i++){
-		//~ checkedBoxes[i].parentNode.parentNode.removeChild(checkedBoxes[i].parentNode);
-	//~ }
+    for (var i = 0; i < checkedBoxes.length; i++){
+		checkedBoxes[i].parentNode.parentNode.removeChild(checkedBoxes[i].parentNode);
+	}
     
 }
-/*
 
-
-function setListeners {
-	element.addEventListener("click", function(){ alert("Hello World!"); });
-	
-}
-
-
-// Javascript pour aller chercher les personnes dans la base de données
-// Regarder l'état des buttons 
-
-
-*/
-
-
-fillProjectList();
-//Ajouter un projet
-
+// Listeners sur les boutons
 document.getElementById('okCreerProjet').addEventListener('click', function () { addProject() });
 document.getElementById('BtnSuppProjet').addEventListener('click', function () { removeProject() });
 document.getElementById('BtnAjoutPerso').addEventListener('click', function () { addPersonne() });
