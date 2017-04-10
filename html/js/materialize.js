@@ -51,8 +51,6 @@ if (typeof(jQuery) === 'undefined') {
  *
 */
 
-var elmtNomProjet = document.getElementById("nom_new_projet");
-elmtNomProjet.value = "";
 
 function activDesactivBouton(elmtBtn){
 	if (elmtBtn.className == "waves-effect waves-light btn"){
@@ -67,14 +65,14 @@ function reinitBoutonDisabled(elmtBtn){
 	elmtBtn.className = "waves-effect waves-light btn disabled";
 }
 	
-function activDesactivBoutonNewProjet(bouton,nomNewProjet){
-	var elmtBtnCreerProjet = document.getElementById(bouton);
-	var nomNewProjet = document.getElementById(nomNewProjet);
-	if (nomNewProjet.value == "" || nomNewProjet.value.substring(0,1) == " " || nomNewProjet.value.substring(0,1) == "-" || nomNewProjet.value.substring(0,1) == "*" || nomNewProjet.value.substring(0,1) == "_" || nomNewProjet.value.substring(0,1) == ":" || nomNewProjet.value.substring(0,1) == "/"){
-		elmtBtnCreerProjet.className = "waves-effect waves-light btn disabled";
+function activDesactivBoutonNewProjet(){
+	if (elmtNomNewProjet.value == "" || elmtNomNewProjet.value.substring(0,1) == " " || elmtNomNewProjet.value.substring(0,1) == "-" || elmtNomNewProjet.value.substring(0,1) == "*" || elmtNomNewProjet.value.substring(0,1) == "_" || elmtNomNewProjet.value.substring(0,1) == ":" || elmtNomNewProjet.value.substring(0,1) == "/"){
+		elmtBtnAjoutProjet.className = "waves-effect waves-light btn disabled";
+		console.log("vide");
 	}
 	else{
-		elmtBtnCreerProjet.className = "waves-effect waves-light btn";
+		elmtBtnAjoutProjet.className = "waves-effect waves-light btn";
+		console.log("ok");
 	}
 }
 
@@ -93,14 +91,15 @@ function activDesactivBoutonSupprPerso(){
 function InitBtnSuppProjet(){
 	var projectList = document.getElementById('Projets');
 	var nomProjet = projectList.querySelector('[class="active"]');
+	elmtBtnSuppProjet.className = "waves-effect waves-light btn disabled";
+	elmtBtnAjoutPerso.className = "waves-effect waves-light btn disabled";
 	if (nomProjet){
 		elmtBtnSuppProjet.className = "waves-effect waves-light btn";
 		elmtBtnAjoutPerso.className = "waves-effect waves-light btn";
 		console.log("ouvert");
 	}
 	else{
-		elmtBtnSuppProjet.className = "waves-effect waves-light btn disabled";
-		elmtBtnAjoutPerso.className = "waves-effect waves-light btn disabled";
+		console.log("fermé");
 	}
 }
 	
@@ -108,6 +107,11 @@ var elmtBtnSuppProjet = document.getElementById("BtnSuppProjet");
 var elmtBtnAjoutPerso = document.getElementById("BtnAjoutPerso");
 var elmtBtnSupprPerso = document.getElementById("BtnSuppPerso");
 var checkBoxes = document.getElementsByClassName("filled-in");
+var elmtBtnAjoutProjet = document.getElementById("okCreerProjet");
+var elmtNomNewProjet = document.getElementById("nom_new_projet");
+//var elmtLabelNomProjet = document.getElementById("labelNomProjet");
+elmtNomNewProjet.value = "";
+//elmtLabelNomProjet.addEventListener("onclick",activDesactivBoutonSupprPerso());
 
 
 
@@ -3460,6 +3464,10 @@ if (jQuery) {
   /*******************
    *  Select Plugin  *
    ******************/
+   $(document).ready(function() {
+    $('select').material_select();
+  });
+  
   $.fn.material_select = function (callback) {
     $(this).each(function(){
       var $select = $(this);
@@ -5378,9 +5386,9 @@ function PickerConstructor( ELEMENT, NAME, COMPONENT, OPTIONS ) {
             /**
              * Clear the values
              */
-            clear: function( options ) {
+           /* clear: function( options ) {
                 return P.set( 'clear', null, options )
-            }, //clear
+            }, //clear*/
 
 
             /**
