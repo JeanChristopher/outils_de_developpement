@@ -1,3 +1,5 @@
+lien tableau : http://api-adresse.data.gouv.fr/search/?q=paris
+
 if(ajax.readyState == 4 && ajax.status == 200) {
 			var jsonObj = JSON.parse(ajax.responseText);
 			var features = jsonObj.features;
