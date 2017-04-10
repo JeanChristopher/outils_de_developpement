@@ -221,7 +221,21 @@ function removeProject() {
 
 // Charge la liste des personnes
 function fillPeopleList() {
-
+    
+    var listPerson;
+    
+    var ajax1 = new XMLHttpRequest();
+	ajax1.open('POST', 'php/requete.php', true);
+	ajax1.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+	ajax1.addEventListener('readystatechange',  function(e) {
+		if(ajax1.readyState == 4 && ajax1.status == 200) {
+			listPerson = ajax1.responseText
+		}        
+	});
+	
+	var data = "idFonction=addPersonTolist";
+	ajax1.send(data); 
+    
 
 }
 
@@ -319,7 +333,7 @@ function removePersonne() {
 	}
     
 }
-
+fillPeopleList();
 // Listeners sur les boutons
 document.getElementById('okCreerProjet').addEventListener('click', function () { addProject() });
 document.getElementById('BtnSuppProjet').addEventListener('click', function () { removeProject() });
