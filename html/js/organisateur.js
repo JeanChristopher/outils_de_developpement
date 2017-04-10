@@ -2,18 +2,25 @@
 // Charge la liste des projets 
 function fillProjectList() {
 	
+	var arrayOfProjects;
+	
     var ajax1 = new XMLHttpRequest();
 	ajax1.open('POST', 'php/requete.php', true);
 	ajax1.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 	ajax1.addEventListener('readystatechange',  function(e) {
 		if(ajax1.readyState == 4 && ajax1.status == 200) {
-			arrayOfProjects = ajax1.responseText;
-			console.log(arrayOfProjects);
+			arrayOfProjects = JSON.parse(ajax1.responseText);
+			var features = jsonObj.features;
+			for (var i=0; i < features.lenght; i++) {
+				
+			}
+			
+
 		}        
 	});
 	
 	var data = "idFonction=getCurrentProjects";
-	ajax1.send(data); 
+	ajax1.send(data);
 	
 	// tableau de test
 
