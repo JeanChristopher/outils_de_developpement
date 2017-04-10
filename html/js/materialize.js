@@ -103,6 +103,13 @@ function initBoutonNewProjet(bouton){
 	elmtBouton.className = "waves-effect waves-light btn disabled";
 	}
 	
+function InitCheckbox(){ 
+	var input = document.getElementsByTagName("input");  
+	for (var i = 0; i < input.length; i++) { 
+		input[i].checked = false; 
+	} 
+}
+	
 var elmtBtnSuppProjet = document.getElementById("BtnSuppProjet");
 var elmtBtnAjoutPerso = document.getElementById("BtnAjoutPerso");
 var elmtBtnSupprPerso = document.getElementById("BtnSuppPerso");
@@ -648,7 +655,7 @@ if (jQuery) {
 	
 		
 		//réinitialisation des checkbox
-		
+		InitCheckbox();
 
 		
 		
