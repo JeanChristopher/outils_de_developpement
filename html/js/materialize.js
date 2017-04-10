@@ -656,9 +656,9 @@ if (jQuery) {
 		
 		//réinitialisation des checkbox
 		InitCheckbox();
+		var elmtBtnSupprPerso = document.getElementById("BtnSuppPerso");
+		elmtBtnSupprPerso.className = "waves-effect waves-light btn disabled";
 
-		
-		
         collapsibleOpen(element);
 		InitBtnSuppProjet();
       });
